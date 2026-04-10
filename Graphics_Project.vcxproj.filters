@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\include">
+      <UniqueIdentifier>{c01cc00c-a8c9-4b11-9f2b-99f729e7b15b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\shaders">
+      <UniqueIdentifier>{b2be2627-1108-42f4-9694-1f52aedf79b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\textures">
+      <UniqueIdentifier>{3462ff33-13bc-48a9-b8f7-cf74cf2982a1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="directionalLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\basic_camera.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bezierCurve.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\camera.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\complex_machine.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\complex_machines.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cube.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\directionalLight.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\enhanced_signboard.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fractalTree.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\hexagon.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pointLight.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\procedural_textures.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pyramid.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\shader.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sphere.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\spotLight.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stb_image.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texture_fallback_system.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\texture_paths.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="opengl\glad.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stb_image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Graphics_Project.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\fashion_room.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\fashion_shop.png">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\floor_tiles_texture.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\food_court.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\food_court.png">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\gems_shop.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\grass.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\map.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\prayer_room.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\task_inspection.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\task_packing.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\task_shipping.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\task_stamping.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\task_welding.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\tech_shop.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\tech_shop.png">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\tree_leaves_texture.png">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\tree_texture.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\fragmentShader.fs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\fragmentShaderForGouraudShading.fs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\fragmentShaderForPhongShading.fs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\fragmentShaderForPhongShadingWithTexture.fs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\vertexShader.vs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\vertexShaderForGouraudShading.vs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\vertexShaderForPhongShading.vs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="shaders\vertexShaderForPhongShadingWithTexture.vs">
+      <Filter>Source Files\shaders</Filter>
+    </None>
+    <None Include="BUILD_INSTRUCTIONS.md" />
+    <None Include="setup_project.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="GraphicsProject.props" />
+    <None Include="fix_project.ps1" />
+    <None Include="COMPLETE_BUILD_SOLUTION.md" />
+    <None Include="README_BUILD_FIX.md" />
+    <None Include="SOLUTION_SUMMARY.md" />
+    <None Include="FINAL_DELIVERY_SUMMARY.md" />
+    <None Include="DELIVERY_CONTENTS.md" />
+    <None Include="DOCUMENTATION_INDEX.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="CONFIGURATION_CHECKLIST.txt" />
+    <Text Include="START_HERE.txt" />
+  </ItemGroup>
+</Project>

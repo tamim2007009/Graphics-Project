@@ -1,0 +1,17 @@
+﻿# Visual Studio cache
+.vs/
+*.ipch
+
+# Build directories  
+obj/
+bin/
+x64/
+Debug/
+Release/
+
+# Visual Studio project files
+*.user
+*.sln.iml
+
+# Editor
+.vscode/
