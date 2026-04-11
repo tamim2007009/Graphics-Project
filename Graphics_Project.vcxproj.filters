@@ -245,6 +245,13 @@
     <None Include="README_LIGHTING_FIX.md" />
     <None Include="SPECULAR_REMOVAL_SUMMARY.md" />
     <None Include="FINAL_REMOVAL_SUMMARY.md" />
+    <None Include="LIGHT_DIRECTION_FIX.md" />
+    <None Include="LIGHT_FIX_SUMMARY.md" />
+    <None Include="BEFORE_AFTER_COMPARISON.md" />
+    <None Include="QUICK_START.md" />
+    <None Include="VERIFICATION_REPORT.md" />
+    <None Include="README_LIGHT_FIX.md" />
+    <None Include="INDEX.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="PROJECT_STRUCTURE.txt" />

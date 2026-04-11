@@ -192,6 +192,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="00_START_HERE.md" />
+    <None Include="BEFORE_AFTER_COMPARISON.md" />
     <None Include="BRICK_LOADING_FIX.md" />
     <None Include="CURVES_IN_PROJECT_ANALYSIS.md" />
     <None Include="DIAGNOSE_TEXTURES.bat" />
@@ -213,13 +214,18 @@
     <None Include="IMPLEMENTATION_COMPLETE.md" />
     <None Include="IMPLEMENTATION_SUMMARY.md" />
     <None Include="include\CURVES_README.md" />
+    <None Include="INDEX.md" />
     <None Include="LIGHTING_COMPONENT_IMPLEMENTATION.md" />
     <None Include="LIGHTING_FIXTURES_AND_IMPROVEMENTS.md" />
+    <None Include="LIGHT_DIRECTION_FIX.md" />
+    <None Include="LIGHT_FIX_SUMMARY.md" />
     <None Include="PROJECT_STRUCTURE.md" />
     <None Include="QUICK_FIX.md" />
+    <None Include="QUICK_START.md" />
     <None Include="QUICK_VISUAL_REFERENCE.md" />
     <None Include="README_BRICK_FIX.md" />
     <None Include="README_LIGHTING_FIX.md" />
+    <None Include="README_LIGHT_FIX.md" />
     <None Include="REALISTIC_HANDRAIL_IMPLEMENTATION.md" />
     <None Include="shaders\fragmentShader.fs" />
     <None Include="shaders\fragmentShaderForGouraudShading.fs" />
@@ -235,6 +241,7 @@
     <None Include="split_phase4.py" />
     <None Include="TECHNICAL_IMPLEMENTATION_DETAILS.md" />
     <None Include="TEXTURE_LOADING_GUIDE.md" />
+    <None Include="VERIFICATION_REPORT.md" />
     <None Include="VS_WORKING_DIRECTORY_SETUP.md" />
   </ItemGroup>
   <ItemGroup>

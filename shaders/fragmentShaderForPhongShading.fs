@@ -188,27 +188,14 @@ vec3 CalcPointLight(Material mat, PointLight light, vec3 N, vec3 Pos, vec3 V)
 
 vec3 CalcDirLight(Material mat, DirectionalLight light, vec3 N, vec3 Pos, vec3 V)
 {
-    vec3 fragToLight = normalize(light.position - Pos);
-    vec3 lightDir = normalize(light.direction);
-    float theta = dot(-fragToLight, lightDir);
-
-    float d = length(light.position - Pos);
-    float attenuation = 1.0 / (1.0 + 0.045 * d + 0.0075 * d * d);
-
-    vec3 ambient = mat.ambient * light.ambient * attenuation;
-    vec3 diffuse  = vec3(0.0);
-    vec3 specular = vec3(0.0);
-
-    if (theta > light.cutoff)
-    {
-        float epsilon = 0.05;
-        float intensity = clamp((theta - light.cutoff) / epsilon, 0.0, 1.0);
-
-        vec3 L = fragToLight;
-        vec3 H = normalize(L + V);
-        diffuse  = mat.diffuse * max(dot(N, L), 0.0) * light.diffuse * attenuation * intensity;
-        specular = mat.specular * pow(max(dot(N, H), 0.0), mat.shininess) * light.specular * attenuation * intensity;
-    }
+    // Use direction vector for true directional lighting (no position-based falloff)
+    vec3 L = normalize(light.direction);
+    
+    vec3 ambient = mat.ambient * light.ambient;
+    vec3 diffuse = mat.diffuse * max(dot(N, L), 0.0) * light.diffuse;
+    
+    vec3 H = normalize(L + V);
+    vec3 specular = mat.specular * pow(max(dot(N, H), 0.0), mat.shininess) * light.specular;
 
     return (ambient + diffuse + specular);
 }
@@ -244,23 +231,9 @@ vec3 CalcPointLightDiffuseOnly(Material mat, PointLight light, vec3 N, vec3 Pos,
 
 vec3 CalcDirLightDiffuseOnly(Material mat, DirectionalLight light, vec3 N, vec3 Pos, vec3 V)
 {
-    vec3 fragToLight = normalize(light.position - Pos);
-    vec3 lightDir = normalize(light.direction);
-    float theta = dot(-fragToLight, lightDir);
-
-    float d = length(light.position - Pos);
-    float attenuation = 1.0 / (1.0 + 0.045 * d + 0.0075 * d * d);
-
-    vec3 diffuse = vec3(0.0);
-
-    if (theta > light.cutoff) {
-        float epsilon = 0.05;
-        float intensity = clamp((theta - light.cutoff) / epsilon, 0.0, 1.0);
-
-        vec3 L = fragToLight;
-        diffuse = mat.diffuse * max(dot(N, L), 0.0) * light.diffuse * attenuation * intensity;
-    }
-
+    // Use direction vector for true directional lighting (no position-based falloff)
+    vec3 L = normalize(light.direction);
+    vec3 diffuse = mat.diffuse * max(dot(N, L), 0.0) * light.diffuse;
     return diffuse;
 }
 
@@ -282,28 +255,14 @@ vec3 CalcSpotLightDiffuseOnly(Material mat, SpotLight light, vec3 N, vec3 Pos, v
 // ===== DIRECTIONAL-ONLY FUNCTION =====
 vec3 CalcDirLightOnly(Material mat, DirectionalLight light, vec3 N, vec3 Pos, vec3 V)
 {
-    vec3 L = normalize(light.position - Pos);
-    vec3 lightDir = normalize(light.direction);
-    float theta = dot(-L, lightDir);
-
-    vec3 result = vec3(0.0);
-
-    // No distance attenuation for directional lights (sun-like)
-    // Relaxed cutoff for broader illumination (cos(30°) ? 0.866)
-    if (theta > 0.8) {
-        // Smooth falloff at cone edges for natural lighting
-        float intensity = smoothstep(0.8, 1.0, theta);
-        
-        // Calculate diffuse with full intensity
-        float diffuseStrength = max(dot(N, L), 0.0);
-        result = mat.diffuse * diffuseStrength * light.diffuse * intensity;
-        
-        // Add a base contribution for ambient fill in directional mode
-        result += mat.ambient * light.ambient * 0.5;
-    } else {
-        // Outside cone, very slight illumination
-        result = mat.ambient * light.ambient * 0.2;
-    }
-
-    return result;
+    // Use direction vector for true directional lighting (sun-like, no cone restriction)
+    vec3 L = normalize(light.direction);
+    
+    vec3 ambient = mat.ambient * light.ambient;
+    vec3 diffuse = mat.diffuse * max(dot(N, L), 0.0) * light.diffuse;
+    
+    vec3 H = normalize(L + V);
+    vec3 specular = mat.specular * pow(max(dot(N, H), 0.0), mat.shininess) * light.specular;
+    
+    return ambient + diffuse + specular;
 }
