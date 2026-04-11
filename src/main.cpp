@@ -13,6 +13,7 @@
 #include "../include/sphere.h"
 #include "../include/pyramid.h"
 #include "../include/bezierCurve.h"
+#include "../include/curveApplications.h"
 #include "../include/fractalTree.h"
 #include "../include/stb_image.h"
 #include "../include/texture_fallback_system.h"
@@ -124,6 +125,14 @@ BezierRevolvedSurface* bezierTable = nullptr;
 BezierArch* bezierArch = nullptr;
 BezierRevolvedSurface* bezierColorChamber = nullptr;
 BezierRevolvedSurface* mathCone = nullptr; // True mathematical curvy Cone
+
+// New Curve Applications
+ConveyorPath* conveyorPath = nullptr;
+EscalatorHandrail* escalatorRail = nullptr;
+
+// Visualizable Curves
+VisualizableEscalatorHandrail* visibleHandrail = nullptr;
+VisualizableConveyorPath* visibleConveyorPath = nullptr;
 
 #include "../include/scene_renderer.h"
 #include "../include/scene_state.h"
@@ -340,6 +349,32 @@ void initializeSceneObjects() {
         };
         mathCone->generate(coneProfile, 2, 32); // Minimal segments, high slices for smooth curve revolution
     }
+
+    // ============================================================================
+    // NEW CURVE APPLICATIONS - Catmull-Rom Splines & Ruled Surfaces
+    // ============================================================================
+
+    // Create conveyor path for smooth box flow animation
+    conveyorPath = new ConveyorPath();
+    cout << "  [Curve] Conveyor path initialized (Catmull-Rom spline)" << endl;
+
+    // Create escalator handrail
+    escalatorRail = new EscalatorHandrail();
+    cout << "  [Curve] Escalator handrail initialized (Catmull-Rom spline)" << endl;
+
+    // ============================================================================
+    // VISUALIZABLE CURVES - Make curves visible in the scene
+    // ============================================================================
+    
+    // Create visible escalator handrail tube mesh
+    visibleHandrail = new VisualizableEscalatorHandrail();
+    visibleHandrail->generateMesh(escalatorRail, 60, 0.12f);  // Increased radius to 0.12m (was 0.08m) for better visibility
+    cout << "  [Curve Visualization] Escalator handrail mesh generated (visible brass tube - enhanced radius)" << endl;
+    
+    // Create visible conveyor path line
+    visibleConveyorPath = new VisualizableConveyorPath();
+    visibleConveyorPath->generateVisualization(conveyorPath, 100, 0.05f);
+    cout << "  [Curve Visualization] Conveyor path line generated (visible path trace)" << endl;
 
     // Initialize box system
     for (int i = 0; i < MAX_BOXES; i++) {
@@ -691,6 +726,10 @@ int main()
     delete bezierArch;
     delete bezierColorChamber;
     delete mathCone;
+    delete conveyorPath;
+    delete escalatorRail;
+    delete visibleHandrail;
+    delete visibleConveyorPath;
     glDeleteVertexArrays(1, &cubeVAO);
     glDeleteVertexArrays(1, &lightVAO);
     glDeleteVertexArrays(1, &texCubeVAO);

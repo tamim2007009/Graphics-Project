@@ -44,6 +44,9 @@ extern BezierArch* bezierArch;
 extern BezierRevolvedSurface* bezierColorChamber;
 extern BezierRevolvedSurface* mathCone;
 
+extern VisualizableEscalatorHandrail* visibleHandrail;
+extern VisualizableConveyorPath* visibleConveyorPath;
+
 extern std::vector<EnhancedSignboard> signboards;
 
 inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs, glm::mat4 view, glm::mat4 proj)
@@ -1319,12 +1322,17 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
         float esX = -20.f, esZ1 = 8.0f, esZ2 = 0.0f;
         float esLen = esZ1 - esZ2;
         float esH = 4.5f;
-        // Side rails (run N-S)
+        
+        // WEST SIDE WALL (Light gray for contrast)
+        drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-24.5f, WH, 4}, {WT, MH, 8}, texBrick, 8.0f, 32, 0.9f);
+        
+        // NO EAST WALL IN ESCALATOR AREA - Open corridor for clear handrail visibility
+        // Handrail can be seen from the corridor
+        
+        // Side rails (run N-S) - positioned accurately on west side
         drawCube(V, ls, I, C_LAMP, {esX-0.7f, esH/2, (esZ1+esZ2)/2}, {.05f,esH+.5f,esLen});
         drawCube(V, ls, I, C_LAMP, {esX+0.7f, esH/2, (esZ1+esZ2)/2}, {.05f,esH+.5f,esLen});
-        // Handrails
-        drawCube(V, ls, I, C_LAMP*1.2f, {esX-0.7f, esH+.3f, (esZ1+esZ2)/2}, {.08f,.06f,esLen});
-        drawCube(V, ls, I, C_LAMP*1.2f, {esX+0.7f, esH+.3f, (esZ1+esZ2)/2}, {.08f,.06f,esLen});
+        
         // Moving steps (go from Z=8 bottom to Z=0 top, rising northward)
         int numSteps = 16;
         float stepLen = esLen / numSteps;
@@ -1337,8 +1345,17 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
             float sY = t * esH;
             drawCube(V, ls, I, C_STAIR*1.05f, {esX, sY+.05f, sZ}, {1.2f,.1f,stepLen*.85f});
         }
-        // Floor area around escalator
+        
+        // Floor area around escalator - accurately positioned on west side
         drawCube(V, ls, I, C_STAIR*.9f, {-20, .03f, 4}, {8, .04f, 8});
+        
+        // ===== VISIBLE ESCALATOR HANDRAIL CURVE (Brass tube) - NOW CLEARLY VISIBLE =====
+        // Positioned accurately following the escalator from (-19.3, 0.9, 8) to (-18.9, 3.8, 0)
+        if (visibleHandrail != nullptr) {
+            glm::mat4 railModel = glm::mat4(1.0f); // Identity - curve is already in correct coordinates
+            // Enhanced brass color - more saturated for prominence
+            visibleHandrail->draw(ls, railModel, glm::vec3(0.95f, 0.75f, 0.20f)); // Brighter brass
+        }
     }
 
     // ======== STAIRCASE (East side, X:16 to 24, Z:0 to 8, facing EAST → steps go along X) ========

@@ -99,6 +99,12 @@
     <ClInclude Include="include\scene_state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\scene_renderer.h">
+      <Filter>Source Files\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\curveApplications.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="opengl\glad.c">
@@ -199,8 +205,21 @@
     </None>
     <None Include="PROJECT_STRUCTURE.md" />
     <None Include="split_phase4.py" />
+    <None Include="include\CURVES_README.md" />
+    <None Include="IMPLEMENTATION_COMPLETE.md" />
+    <None Include="TECHNICAL_IMPLEMENTATION_DETAILS.md" />
+    <None Include="CURVES_IN_PROJECT_ANALYSIS.md" />
+    <None Include="ESCALATOR_HANDRAIL_PLACEMENT.md" />
+    <None Include="ESCALATOR_HANDRAIL_REALISTIC_ALIGNMENT.md" />
+    <None Include="ESCALATOR_FINAL_REALISTIC_DESIGN.md" />
+    <None Include="ESCALATOR_COMPLETE_OPEN_VIEW.md" />
+    <None Include="ESCALATOR_HANDRAIL_ENHANCED_VISIBILITY.md" />
+    <None Include="ESCALATOR_HANDRAIL_WALL_FIX.md" />
+    <None Include="REALISTIC_HANDRAIL_IMPLEMENTATION.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="PROJECT_STRUCTURE.txt" />
+    <Text Include="include\CURVE_IMPLEMENTATION_GUIDE.txt" />
+    <Text Include="include\CURVES_OVERVIEW.txt" />
   </ItemGroup>
 </Project>

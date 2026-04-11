@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ExternalIncludePath>$(ProjectDir)\opengl\include;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>C:\Users\tamim\Desktop\Graphics_Project\opengl\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\tamim\Desktop\Graphics_Project\opengl\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\USER\Desktop\Graphics-Project\opengl\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\USER\Desktop\Graphics-Project\opengl\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -140,6 +140,7 @@
     <ClInclude Include="include\complex_machine.h" />
     <ClInclude Include="include\complex_machines.h" />
     <ClInclude Include="include\cube.h" />
+    <ClInclude Include="include\curveApplications.h" />
     <ClInclude Include="include\directionalLight.h" />
     <ClInclude Include="include\enhanced_signboard.h" />
     <ClInclude Include="include\fractalTree.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="include\render_utils.h" />
     <ClInclude Include="include\resource_utils.h" />
     <ClInclude Include="include\scene_colors.h" />
+    <ClInclude Include="include\scene_renderer.h" />
     <ClInclude Include="include\scene_state.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\sphere.h" />
@@ -188,7 +190,17 @@
     <Image Include="textures\tree_texture.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="CURVES_IN_PROJECT_ANALYSIS.md" />
+    <None Include="ESCALATOR_COMPLETE_OPEN_VIEW.md" />
+    <None Include="ESCALATOR_FINAL_REALISTIC_DESIGN.md" />
+    <None Include="ESCALATOR_HANDRAIL_ENHANCED_VISIBILITY.md" />
+    <None Include="ESCALATOR_HANDRAIL_PLACEMENT.md" />
+    <None Include="ESCALATOR_HANDRAIL_REALISTIC_ALIGNMENT.md" />
+    <None Include="ESCALATOR_HANDRAIL_WALL_FIX.md" />
+    <None Include="IMPLEMENTATION_COMPLETE.md" />
+    <None Include="include\CURVES_README.md" />
     <None Include="PROJECT_STRUCTURE.md" />
+    <None Include="REALISTIC_HANDRAIL_IMPLEMENTATION.md" />
     <None Include="shaders\fragmentShader.fs" />
     <None Include="shaders\fragmentShaderForGouraudShading.fs" />
     <None Include="shaders\fragmentShaderForPhongShading.fs" />
@@ -198,8 +210,11 @@
     <None Include="shaders\vertexShaderForPhongShading.vs" />
     <None Include="shaders\vertexShaderForPhongShadingWithTexture.vs" />
     <None Include="split_phase4.py" />
+    <None Include="TECHNICAL_IMPLEMENTATION_DETAILS.md" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="include\CURVES_OVERVIEW.txt" />
+    <Text Include="include\CURVE_IMPLEMENTATION_GUIDE.txt" />
     <Text Include="PROJECT_STRUCTURE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
