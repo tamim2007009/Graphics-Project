@@ -12,6 +12,7 @@ inline bool dirLightEnabled = true;
 inline bool spotLightsEnabled = true;
 inline bool noLightCondition = false;
 inline int shadingMode = 0; // 0 = Phong, 1 = Gouraud
+inline int lightingComponentMode = 4; // 1=Ambient, 2=Directional(Specular), 3=Diffuse, 4=Combined
 
 // Day/Night cycle
 inline float timeOfDay = 10.0f;  // 0-24 hours, start at 10 AM

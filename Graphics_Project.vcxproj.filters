@@ -236,6 +236,15 @@
     <None Include="README_BRICK_FIX.md" />
     <None Include="TEXTURE_LOADING_GUIDE.md" />
     <None Include="VS_WORKING_DIRECTORY_SETUP.md" />
+    <None Include="LIGHTING_COMPONENT_IMPLEMENTATION.md" />
+    <None Include="SPECULAR_LIGHTING_FIX.md" />
+    <None Include="SPECULAR_LIGHTING_IMPROVEMENTS.md" />
+    <None Include="LIGHTING_FIXTURES_AND_IMPROVEMENTS.md" />
+    <None Include="IMPLEMENTATION_SUMMARY.md" />
+    <None Include="QUICK_VISUAL_REFERENCE.md" />
+    <None Include="README_LIGHTING_FIX.md" />
+    <None Include="SPECULAR_REMOVAL_SUMMARY.md" />
+    <None Include="FINAL_REMOVAL_SUMMARY.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="PROJECT_STRUCTURE.txt" />

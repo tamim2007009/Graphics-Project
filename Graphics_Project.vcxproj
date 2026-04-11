@@ -202,6 +202,7 @@
     <None Include="ESCALATOR_HANDRAIL_REALISTIC_ALIGNMENT.md" />
     <None Include="ESCALATOR_HANDRAIL_WALL_FIX.md" />
     <None Include="FINAL_BRICK_FIX.md" />
+    <None Include="FINAL_REMOVAL_SUMMARY.md" />
     <None Include="FIXES_APPLIED.md" />
     <None Include="FRACTAL_TREE_BEFORE_AFTER.md" />
     <None Include="FRACTAL_TREE_FINAL_VERIFICATION.md" />
@@ -210,10 +211,15 @@
     <None Include="FRACTAL_TREE_QUICK_REFERENCE.md" />
     <None Include="FRACTAL_TREE_TECHNICAL_GUIDE.md" />
     <None Include="IMPLEMENTATION_COMPLETE.md" />
+    <None Include="IMPLEMENTATION_SUMMARY.md" />
     <None Include="include\CURVES_README.md" />
+    <None Include="LIGHTING_COMPONENT_IMPLEMENTATION.md" />
+    <None Include="LIGHTING_FIXTURES_AND_IMPROVEMENTS.md" />
     <None Include="PROJECT_STRUCTURE.md" />
     <None Include="QUICK_FIX.md" />
+    <None Include="QUICK_VISUAL_REFERENCE.md" />
     <None Include="README_BRICK_FIX.md" />
+    <None Include="README_LIGHTING_FIX.md" />
     <None Include="REALISTIC_HANDRAIL_IMPLEMENTATION.md" />
     <None Include="shaders\fragmentShader.fs" />
     <None Include="shaders\fragmentShaderForGouraudShading.fs" />
@@ -223,6 +229,9 @@
     <None Include="shaders\vertexShaderForGouraudShading.vs" />
     <None Include="shaders\vertexShaderForPhongShading.vs" />
     <None Include="shaders\vertexShaderForPhongShadingWithTexture.vs" />
+    <None Include="SPECULAR_LIGHTING_FIX.md" />
+    <None Include="SPECULAR_LIGHTING_IMPROVEMENTS.md" />
+    <None Include="SPECULAR_REMOVAL_SUMMARY.md" />
     <None Include="split_phase4.py" />
     <None Include="TECHNICAL_IMPLEMENTATION_DETAILS.md" />
     <None Include="TEXTURE_LOADING_GUIDE.md" />

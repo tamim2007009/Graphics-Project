@@ -16,7 +16,7 @@ inline void drawCube(unsigned int &v, Shader &s, glm::mat4 pm, glm::vec3 c, glm:
     m = glm::scale(m, sc);
     s.setVec3("material.ambient", c * a);
     s.setVec3("material.diffuse", c);
-    s.setVec3("material.specular", glm::vec3(0.3f));
+    s.setVec3("material.specular", glm::vec3(0.8f));  // Increased from 0.3f to 0.8f for better specular visibility
     s.setFloat("material.shininess", sh);
     s.setBool("useTexture", false);
     s.setMat4("model", m);
@@ -27,7 +27,7 @@ inline void drawCube(unsigned int &v, Shader &s, glm::mat4 pm, glm::vec3 c, glm:
 inline void setMaterial(Shader &s, glm::vec3 color, float shininess, float specIntensity, float ambientIntensity = 0.6f) {
     s.setVec3("material.ambient", color * ambientIntensity);
     s.setVec3("material.diffuse", color);
-    s.setVec3("material.specular", glm::vec3(specIntensity));
+    s.setVec3("material.specular", glm::vec3(specIntensity * 2.0f));  // Double the spec intensity for better visibility
     s.setFloat("material.shininess", shininess);
 }
 
@@ -38,7 +38,7 @@ inline void drawCubeTextured(unsigned int &v, Shader &s, glm::mat4 pm, glm::vec3
     m = glm::scale(m, sc);
     s.setVec3("material.ambient", c * a);
     s.setVec3("material.diffuse", c);
-    s.setVec3("material.specular", glm::vec3(0.3f));
+    s.setVec3("material.specular", glm::vec3(0.8f));  // Increased from 0.3f for better visibility
     s.setFloat("material.shininess", sh);
     if (texturesEnabled && tex != 0)
     {

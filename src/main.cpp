@@ -84,12 +84,12 @@ glm::vec3 plPos[NUM_POINT_LIGHTS] = {
 PointLight *pointLights[NUM_POINT_LIGHTS];
 DirectionalLight dirLight(
     glm::vec3(-10, 6.2f, 42), glm::vec3(0, -1, 0),
-    glm::vec3(0.08f, 0.07f, 0.03f), glm::vec3(0.9f, 0.75f, 0.4f),
-    glm::vec3(0.7f, 0.55f, 0.3f), 35.f);
+    glm::vec3(0.15f, 0.14f, 0.10f), glm::vec3(1.2f, 1.0f, 0.7f),
+    glm::vec3(0.9f, 0.75f, 0.5f), 30.f);
 DirectionalLight dirLight2(
     glm::vec3(10, 6.2f, 42), glm::vec3(0, -1, 0),
-    glm::vec3(0.08f, 0.07f, 0.03f), glm::vec3(0.9f, 0.75f, 0.4f),
-    glm::vec3(0.7f, 0.55f, 0.3f), 35.f);
+    glm::vec3(0.15f, 0.14f, 0.10f), glm::vec3(1.2f, 1.0f, 0.7f),
+    glm::vec3(0.9f, 0.75f, 0.5f), 30.f);
 int activeViewport = 0;
 
 // Spot Lights (store display highlights)
@@ -155,6 +155,7 @@ void printControls() {
     cout << "  1            Toggle Ambient Light" << endl;
     cout << "  2            Toggle Point Lights" << endl;
     cout << "  3            Toggle Directional Light (Sun/Lamps)" << endl;
+    cout << "  4            Cycle Lighting Modes (Ambient->Directional->Diffuse->Combined)" << endl;
     cout << "  5            Toggle Spot Lights (Store displays)" << endl;
     cout << "  L            Toggle No Light Condition (Unlit Texture)" << endl;
     cout << "  H            Toggle Shading Mode (Phong <-> Gouraud)" << endl;
@@ -603,6 +604,7 @@ int main()
         ls.setVec3("viewPos", basic_camera.eye);
         ls.setBool("noLightCondition", noLightCondition);
         ls.setInt("shadingMode", shadingMode);
+        ls.setInt("lightingComponentMode", lightingComponentMode);
         
         // Enhanced ambient lighting based on day/night cycle
         glm::vec3 ambientDay(0.15f, 0.15f, 0.18f);
@@ -619,10 +621,10 @@ int main()
         }
 
         // Sun directional light interpolation (warm day → cool night)
-        glm::vec3 sunDiffDay(0.9f, 0.75f, 0.4f);
-        glm::vec3 sunDiffNight(0.05f, 0.05f, 0.12f);
-        glm::vec3 sunSpecDay(0.7f, 0.55f, 0.3f);
-        glm::vec3 sunSpecNight(0.02f, 0.02f, 0.05f);
+        glm::vec3 sunDiffDay(1.2f, 1.0f, 0.7f);
+        glm::vec3 sunDiffNight(0.15f, 0.12f, 0.20f);
+        glm::vec3 sunSpecDay(0.9f, 0.75f, 0.5f);
+        glm::vec3 sunSpecNight(0.1f, 0.08f, 0.15f);
         dirLight.diffuse = glm::mix(sunDiffDay, sunDiffNight, dnMix);
         dirLight.specular = glm::mix(sunSpecDay, sunSpecNight, dnMix);
         dirLight2.diffuse = dirLight.diffuse;
@@ -1247,6 +1249,12 @@ void key_callback(GLFWwindow *w, int key, int sc, int action, int mods)
     {
         dirLightEnabled = !dirLightEnabled;
         cout << "Dir Light: " << (dirLightEnabled ? "ON" : "OFF") << endl;
+    }
+    if (key == GLFW_KEY_4)
+    {
+        lightingComponentMode = (lightingComponentMode % 4) + 1;
+        const char* cModes[] = {"", "AMBIENT LIGHT ONLY", "DIRECTIONAL LIGHT ONLY", "DIFFUSE LIGHT ONLY", "COMBINED LIGHTING"};
+        cout << "Lighting Component Mode: " << cModes[lightingComponentMode] << endl;
     }
     if (key == GLFW_KEY_5)
     {

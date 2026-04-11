@@ -16,6 +16,7 @@ uniform mat4 view;
 uniform mat4 projection;
 
 uniform int shadingMode;
+uniform int lightingComponentMode;
 
 struct PointLight {
     vec3 position;
