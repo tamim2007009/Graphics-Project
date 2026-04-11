@@ -166,22 +166,22 @@ public:
         
         std::vector<glm::vec3> controlPoints = {
             // Extrapolation point P0 (for Catmull-Rom continuity)
-            {-19.0f, 0.2f, 9.0f},
+            {-20.5f, 0.2f, 9.0f},
             
             // P1: Bottom of handrail (at first step, Z=8)
             // Y = (8-8)/8 * 4.5 + 0.9 = 0.9
-            {-19.0f, 0.9f, 8.0f},
+            {-20.5f, 0.9f, 8.0f},
             
             // P2: Middle of handrail (midway, Z=4)
             // Y = (8-4)/8 * 4.5 + 0.9 = 3.15
-            {-19.0f, 3.15f, 4.0f},
+            {-20.5f, 3.15f, 4.0f},
             
             // P3: Top of handrail (at top step, Z=0)
             // Y = (8-0)/8 * 4.5 + 0.9 = 5.4
-            {-19.0f, 5.4f, 0.0f},
+            {-20.5f, 5.4f, 0.0f},
             
             // Extrapolation point P4 (for Catmull-Rom continuity)
-            {-19.0f, 6.1f, -1.0f}
+            {-20.5f, 6.1f, -1.0f}
         };
 
         // Generate smooth spline - high samples for smooth curve
