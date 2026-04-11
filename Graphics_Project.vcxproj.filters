@@ -216,6 +216,12 @@
     <None Include="ESCALATOR_HANDRAIL_ENHANCED_VISIBILITY.md" />
     <None Include="ESCALATOR_HANDRAIL_WALL_FIX.md" />
     <None Include="REALISTIC_HANDRAIL_IMPLEMENTATION.md" />
+    <None Include="FRACTAL_TREE_IMPROVEMENTS.md" />
+    <None Include="FRACTAL_TREE_TECHNICAL_GUIDE.md" />
+    <None Include="FRACTAL_TREE_IMPLEMENTATION_SUMMARY.md" />
+    <None Include="FRACTAL_TREE_BEFORE_AFTER.md" />
+    <None Include="FRACTAL_TREE_QUICK_REFERENCE.md" />
+    <None Include="FRACTAL_TREE_FINAL_VERIFICATION.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="PROJECT_STRUCTURE.txt" />

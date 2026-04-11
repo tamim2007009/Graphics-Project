@@ -39,28 +39,24 @@ public:
     unsigned int leafVAO = 0;
     int leafIndexCount = 0;
     std::vector<LeafCluster> leafClusters;
+    unsigned int seed = 0;
 
-    FractalTree() {}
+    FractalTree() { seed = (unsigned int)rand(); }
 
-    // Generate the fractal tree structure
+    // Generate the fractal tree structure with enhanced realism
     // root: base position, height: trunk height, radius: trunk radius
     // depth: recursion depth (3-5 recommended), branchAngle: degrees
     void generate(glm::vec3 root, float height, float radius, int depth, float branchAngle = 30.0f) {
         std::vector<Branch> branches;
         leafClusters.clear();
 
-        // Start recursive generation
-        glm::vec3 direction(0, 1, 0); // grow upward
-        generateBranches(root, direction, height, radius, depth, branchAngle, branches);
+        glm::vec3 direction(0, 1, 0);
+        generateBranches(root, direction, height, radius, depth, branchAngle, branches, 0);
 
-        // Build cylinder meshes for all branches
         buildBranchMesh(branches);
-
-        // Build simple sphere mesh for leaf clusters (shared geometry)
         buildLeafMesh();
     }
 
-    // Draw the tree with bark texture on branches
     void drawBranches(Shader& s, glm::mat4 model, unsigned int barkTex, bool useTextures) {
         if (branchVAO == 0) return;
         s.use();
@@ -72,7 +68,7 @@ public:
         if (useTextures && barkTex != 0) {
             s.setBool("useTexture", true);
             s.setBool("blendWithColor", true);
-            s.setFloat("texTiling", 1.0f);
+            s.setFloat("texTiling", 2.0f);
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, barkTex);
             s.setInt("texture1", 0);
@@ -88,26 +84,25 @@ public:
         s.setBool("blendWithColor", false);
     }
 
-    // Draw leaf clusters as spheres
     void drawLeaves(Shader& s, glm::mat4 baseModel, unsigned int leafTex, bool useTextures) {
         if (leafVAO == 0 || leafClusters.empty()) return;
 
         for (auto& lc : leafClusters) {
             glm::mat4 m = glm::translate(baseModel, lc.position);
-            m = glm::scale(m, glm::vec3(lc.size));
+            m = glm::scale(m, glm::vec3(lc.size * 0.8f, lc.size * 1.2f, lc.size * 0.85f));
 
             s.use();
-            // Vary green shades slightly
-            float g = 0.45f + (float)(rand() % 20) * 0.01f;
-            s.setVec3("material.ambient", glm::vec3(0.15f, g * 0.6f, 0.10f));
-            s.setVec3("material.diffuse", glm::vec3(0.20f, g, 0.15f));
-            s.setVec3("material.specular", glm::vec3(0.1f));
-            s.setFloat("material.shininess", 8.0f);
+            float variation = fmod(lc.position.x + lc.position.y + lc.position.z, 1.0f);
+            float g = 0.40f + variation * 0.25f;
+            s.setVec3("material.ambient", glm::vec3(0.12f, g * 0.5f, 0.08f));
+            s.setVec3("material.diffuse", glm::vec3(0.18f, g, 0.12f));
+            s.setVec3("material.specular", glm::vec3(0.08f));
+            s.setFloat("material.shininess", 6.0f);
 
             if (useTextures && leafTex != 0) {
                 s.setBool("useTexture", true);
                 s.setBool("blendWithColor", true);
-                s.setFloat("texTiling", 1.0f);
+                s.setFloat("texTiling", 1.5f);
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, leafTex);
                 s.setInt("texture1", 0);
@@ -125,24 +120,30 @@ public:
     }
 
 private:
-    // Recursive branch generation
+    // Seeded random number generator for consistent but varied results
+    float randomFloat(float min, float max) {
+        seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+        return min + (seed % 10000) / 10000.0f * (max - min);
+    }
+
     void generateBranches(glm::vec3 start, glm::vec3 dir, float length, float radius,
-                          int depth, float branchAngle, std::vector<Branch>& branches) {
-        if (depth <= 0 || length < 0.05f) {
-            // Terminal: add leaf cluster
-            leafClusters.push_back({start, radius * 5.0f + 0.3f});
+                          int depth, float branchAngle, std::vector<Branch>& branches, int currentDepth) {
+        if (depth <= 0 || length < 0.03f) {
+            float leafSize = radius * 4.5f + randomFloat(0.2f, 0.5f);
+            leafClusters.push_back({start, leafSize});
             return;
         }
 
         glm::vec3 end = start + dir * length;
         branches.push_back({start, end, radius, depth});
 
-        // Reduce for child branches
-        float childLength = length * 0.65f;
-        float childRadius = radius * 0.6f;
+        // Adaptive reduction: vary reduction factor for natural variation
+        float reductionFactor = 0.65f + randomFloat(-0.08f, 0.08f);
+        float childLength = length * reductionFactor;
+        float childRadius = radius * (0.55f + randomFloat(-0.05f, 0.05f));
+
         float angleRad = branchAngle * (float)M_PI_FT / 180.0f;
 
-        // Find perpendicular vectors to direction
         glm::vec3 up = glm::normalize(dir);
         glm::vec3 right;
         if (fabs(up.y) < 0.99f) {
@@ -152,25 +153,25 @@ private:
         }
         glm::vec3 forward = glm::normalize(glm::cross(right, up));
 
-        // Generate 2-3 child branches at different angles
-        int numChildren = (depth > 2) ? 3 : 2;
+        // Variable number of children: 2-4 based on depth
+        int numChildren = (depth > 2) ? (3 + (currentDepth % 2)) : 2;
         for (int i = 0; i < numChildren; i++) {
-            float phi = 2.0f * (float)M_PI_FT * i / numChildren + depth * 0.5f; // rotation around trunk
-            float tiltAngle = angleRad + (i % 2 == 0 ? 0.1f : -0.05f); // slight variation
+            float phi = 2.0f * (float)M_PI_FT * i / numChildren + randomFloat(-0.3f, 0.3f);
+            float tiltAngle = angleRad + randomFloat(-0.15f, 0.15f);
 
             glm::vec3 childDir = up * cosf(tiltAngle)
                                  + (right * cosf(phi) + forward * sinf(phi)) * sinf(tiltAngle);
             childDir = glm::normalize(childDir);
 
-            generateBranches(end, childDir, childLength, childRadius, depth - 1, branchAngle, branches);
+            generateBranches(end, childDir, childLength, childRadius, depth - 1,
+                           branchAngle + randomFloat(-5.0f, 5.0f), branches, currentDepth + 1);
         }
     }
 
-    // Build cylinder mesh from branch list
     void buildBranchMesh(const std::vector<Branch>& branches) {
         std::vector<float> verts;
         std::vector<unsigned int> inds;
-        int segments = 6; // sides per cylinder
+        int segments = 8;
         int baseVert = 0;
 
         for (auto& b : branches) {
@@ -184,7 +185,7 @@ private:
             else right = glm::normalize(glm::cross(up, glm::vec3(1, 0, 0)));
             glm::vec3 fwd = glm::normalize(glm::cross(right, up));
 
-            float topRadius = b.radius * 0.7f;
+            float topRadius = b.radius * 0.60f;
 
             for (int ring = 0; ring < 2; ring++) {
                 float r = (ring == 0) ? b.radius : topRadius;
@@ -205,7 +206,6 @@ private:
                 }
             }
 
-            // Connect rings with triangles
             for (int s = 0; s < segments; s++) {
                 int a = baseVert + s;
                 int b2 = baseVert + s + 1;
@@ -239,12 +239,11 @@ private:
         glBindVertexArray(0);
     }
 
-    // Build a simple sphere mesh for leaf clusters
     void buildLeafMesh() {
         std::vector<float> verts;
         std::vector<unsigned int> inds;
-        int sectorCount = 8;
-        int stackCount = 6;
+        int sectorCount = 12;
+        int stackCount = 8;
 
         for (int i = 0; i <= stackCount; i++) {
             float stackAngle = (float)M_PI_FT / 2.0f - i * (float)M_PI_FT / stackCount;
@@ -257,7 +256,7 @@ private:
                 float z = xy * sinf(sectorAngle);
 
                 verts.push_back(x); verts.push_back(y); verts.push_back(z);
-                verts.push_back(x); verts.push_back(y); verts.push_back(z); // normal = position (unit sphere)
+                verts.push_back(x); verts.push_back(y); verts.push_back(z);
                 verts.push_back((float)j / sectorCount); verts.push_back((float)i / stackCount);
             }
         }
