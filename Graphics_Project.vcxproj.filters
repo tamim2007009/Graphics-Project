@@ -87,6 +87,18 @@
     <ClInclude Include="include\texture_paths.h">
       <Filter>Source Files\include</Filter>
     </ClInclude>
+    <ClInclude Include="include\scene_colors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\resource_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\render_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\scene_state.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="opengl\glad.c">
@@ -185,21 +197,10 @@
     <None Include="shaders\vertexShaderForPhongShadingWithTexture.vs">
       <Filter>Source Files\shaders</Filter>
     </None>
-    <None Include="BUILD_INSTRUCTIONS.md" />
-    <None Include="setup_project.bat">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="GraphicsProject.props" />
-    <None Include="fix_project.ps1" />
-    <None Include="COMPLETE_BUILD_SOLUTION.md" />
-    <None Include="README_BUILD_FIX.md" />
-    <None Include="SOLUTION_SUMMARY.md" />
-    <None Include="FINAL_DELIVERY_SUMMARY.md" />
-    <None Include="DELIVERY_CONTENTS.md" />
-    <None Include="DOCUMENTATION_INDEX.md" />
+    <None Include="PROJECT_STRUCTURE.md" />
+    <None Include="split_phase4.py" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CONFIGURATION_CHECKLIST.txt" />
-    <Text Include="START_HERE.txt" />
+    <Text Include="PROJECT_STRUCTURE.txt" />
   </ItemGroup>
 </Project>

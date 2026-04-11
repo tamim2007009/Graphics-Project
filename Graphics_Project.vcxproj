@@ -147,6 +147,10 @@
     <ClInclude Include="include\pointLight.h" />
     <ClInclude Include="include\procedural_textures.h" />
     <ClInclude Include="include\pyramid.h" />
+    <ClInclude Include="include\render_utils.h" />
+    <ClInclude Include="include\resource_utils.h" />
+    <ClInclude Include="include\scene_colors.h" />
+    <ClInclude Include="include\scene_state.h" />
     <ClInclude Include="include\shader.h" />
     <ClInclude Include="include\sphere.h" />
     <ClInclude Include="include\spotLight.h" />
@@ -193,6 +197,7 @@
     <None Include="shaders\vertexShaderForGouraudShading.vs" />
     <None Include="shaders\vertexShaderForPhongShading.vs" />
     <None Include="shaders\vertexShaderForPhongShadingWithTexture.vs" />
+    <None Include="split_phase4.py" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="PROJECT_STRUCTURE.txt" />
