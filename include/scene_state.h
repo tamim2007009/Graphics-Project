@@ -45,7 +45,7 @@ inline float entranceDoorOffset = 0.0f; // 0=closed, 1=open
 
 // Texture IDs
 inline unsigned int texCubeVAO = 0;
-inline unsigned int texFloor = 0, texFashion = 0, texTech = 0, texGems = 0, texFood = 0, texTreeLeaf = 0, texTreeBark = 0, texGrass = 0;
+inline unsigned int texFloor = 0, texFashion = 0, texTech = 0, texGems = 0, texFood = 0, texTreeLeaf = 0, texTreeBark = 0, texGrass = 0, texIndustryFloor = 0;
 inline unsigned int texBrick = 0, texConcrete = 0, texMetal = 0, texWood = 0, texRoof = 0, texAsphalt = 0;
 
 // Assignment Features Exhibition State

@@ -188,15 +188,15 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     // MALL EXTERIOR (X:-25 to 25, Z:-25 to 25)
 
     // North wall - with brick texture for realism
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {0, WH, -25}, {50, MH, WT}, texBrick, 8.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {0, WH, -25}, {50, MH, WT}, texBrick, 25.0f, 32, 0.9f);
     // South wall (gap X:-4 to 4 for entrance) - with brick texture
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-14.5f, WH, 25}, {21, MH, WT}, texBrick, 8.0f, 32, 0.9f);
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {14.5f, WH, 25}, {21, MH, WT}, texBrick, 8.0f, 32, 0.9f);
-    drawCube(V, ls, I, C_EXT, {0, MH - .5f, 25}, {8, 1, WT}); // strip above entrance
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-14.5f, WH, 25}, {21, MH, WT}, texBrick, 12.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {14.5f, WH, 25}, {21, MH, WT}, texBrick, 12.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {0, MH - .5f, 25}, {8, 1, WT}, texBrick, 4.0f, 32, 0.9f); // strip above entrance
     // West wall - with brick texture
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-25, WH, 0}, {WT, MH, 50}, texBrick, 10.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-25, WH, 0}, {WT, MH, 50}, texBrick, 25.0f, 32, 0.9f);
     // East wall - with brick texture
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {25, WH, 0}, {WT, MH, 50}, texBrick, 10.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {25, WH, 0}, {WT, MH, 50}, texBrick, 25.0f, 32, 0.9f);
     // Entrance awning
     drawCube(V, ls, I, C_AWNING, {0, MH + .1f, 26.5f}, {12, .2f, 3.5f});
     // Glass panels beside entrance
@@ -238,7 +238,8 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     auto drawFactoryWarehouse = [&]() {
     // FACTORY FLOOR & CEILING (industrial look)
     ls.setBool("blendWithColor", true);
-    drawCubeTextured(texCubeVAO, ls, I, C_FACTORY_FLOOR, {0, -.02f, 0}, {49.5f, .08f, 49.5f}, texConcrete, 10.0f, 8, .95f);
+    drawCubeTextured(texCubeVAO, ls, I, C_FACTORY_FLOOR, {-12.375f, -.02f, 0}, {24.75f, .08f, 49.5f}, texIndustryFloor, 10.0f, 8, .95f);
+    drawCubeTextured(texCubeVAO, ls, I, C_FACTORY_FLOOR, {12.375f, -.02f, 0}, {24.75f, .08f, 49.5f}, texConcrete, 10.0f, 8, .95f);
     ls.setBool("blendWithColor", false);
     drawCube(V, ls, I, C_CEILING * 0.9f, {0, MH, 0}, {49.5f, .15f, 49.5f});
     drawCube(V, ls, I, C_PARKING, {0, MH + .05f, 0}, {49.5f, .1f, 49.5f}, 8, .8f);
@@ -821,8 +822,8 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
 
     // ======== INDUSTRIAL MANUFACTURING ZONE (X:-24.5 to -4, Z:8 to 24) — Southwest ========
     {
-        // Complete industrial manufacturing facility
-        drawCubeTextured(texCubeVAO, ls, I, C_FACTORY_FLOOR, {-14, .03f, 16}, {21, .04f, 16}, texConcrete, 6.0f, 16, 1.0f);
+        // Complete industrial manufacturing facility smoothly mapping industry floor texture
+        drawCubeTextured(texCubeVAO, ls, I, C_FACTORY_FLOOR, {-14, .03f, 16}, {21, .04f, 16}, texIndustryFloor, 6.0f, 16, 1.0f);
         drawCubeTextured(texCubeVAO, ls, I, C_MACHINE * 0.8f, {-24.5f, WH, 16}, {WT, MH, 16}, texBrick, 4.0f, 32, 1.0f); // dark industrial wall
         
         // ===== STAMPING PRESS STATION (Left side) =====
@@ -1324,7 +1325,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
         float esH = 4.5f;
         
         // WEST SIDE WALL (Light gray for contrast)
-        drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-24.5f, WH, 4}, {WT, MH, 8}, texBrick, 8.0f, 32, 0.9f);
+        drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-24.5f, WH, 4}, {WT, MH, 8}, texBrick, 4.0f, 32, 0.9f);
         
         // NO EAST WALL IN ESCALATOR AREA - Open corridor for clear handrail visibility
         // Handrail can be seen from the corridor
@@ -1378,7 +1379,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     // ======== PRAYER ROOM (X:-24.5 to -4, Z:-14 to -7) — Northwest upper ========
     {
         drawCubeTextured(texCubeVAO, ls, I, C_PRAY_FLOOR, {-14, .03f, -10.5f}, {21, .04f, 7}, texFloor, 6.0f, 16, 1.0f);
-        drawCube(V, ls, I, C_PRAY_WALL, {-24.5f, WH, -10.5f}, {WT, MH, 7});
+        drawCubeTextured(texCubeVAO, ls, I, C_PRAY_WALL, {-24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 4.0f, 32, 1.0f);
         // Prayer mat
         drawCube(V, ls, I, C_PRAY_MAT, {-16, .06f, -10}, {5, .04f, 3});
         drawCube(V, ls, I, C_PRAY_MAT*.9f, {-16, .07f, -10}, {4, .02f, 2.2f});
@@ -1402,7 +1403,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     // ======== GEMS SHOP (X:4 to 24.5, Z:-14 to -7) — Northeast upper ========
     {
         drawCubeTextured(texCubeVAO, ls, I, C_GEM_WALL, {14, .03f, -10.5f}, {21, .04f, 7}, texFloor, 6.0f, 32, 1.0f);
-        drawCube(V, ls, I, C_GEM_WALL, {24.5f, WH, -10.5f}, {WT, MH, 7});
+        drawCubeTextured(texCubeVAO, ls, I, C_GEM_WALL, {24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 4.0f, 32, 1.0f);
         // Glass display cases
         for (int i = 0; i < 3; i++) {
             float gx = 9 + i * 6.f;
@@ -1490,28 +1491,28 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
 
     // ROOF PARAPET
     float pY = MH + .5f;
-    drawCube(V, ls, I, C_PARAPET, {0, pY, -25}, {50, 1, .3f});
-    drawCube(V, ls, I, C_PARAPET, {0, pY, 25}, {50, 1, .3f});
-    drawCube(V, ls, I, C_PARAPET, {-25, pY, 0}, {.3f, 1, 50});
-    drawCube(V, ls, I, C_PARAPET, {25, pY, 0}, {.3f, 1, 50});
+    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {0, pY, -25}, {50, 1, .3f}, texBrick, 25.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {0, pY, 25}, {50, 1, .3f}, texBrick, 25.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {-25, pY, 0}, {.3f, 1, 50}, texBrick, 25.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {25, pY, 0}, {.3f, 1, 50}, texBrick, 25.0f, 32, 0.9f);
 
     // ===== DRAW ALL SIGNBOARDS =====
-    // Update signboard status dynamically based on system states
+    // Update signboard status dynamically based on system states (Reversed Indices)
     if (signboards.size() >= 10) {
-        signboards[0].isActive = conveyorRunning && (machineState.pressVelocity != 0.0f); // STAMPING
-        signboards[1].isActive = conveyorRunning && (machineState.weldTorchGlow > 0.15f); // WELDING
-        signboards[2].isActive = conveyorRunning; // INSPECT
-        signboards[3].isActive = packagingRunning && (palletizerCurrentSource >= 0); // PALLET
-        signboards[4].isActive = packagingRunning; // WRAP
-        signboards[5].isActive = packagingRunning; // SHIP
-        signboards[6].isActive = conveyorRunning; // ASSEMBLY
-        signboards[7].isActive = conveyorRunning; // COLOR APPLIED
-        signboards[8].isActive = packagingRunning; // PACKED
-        signboards[9].isActive = gatheredBoxes > 0; // GATHERED
+        signboards[9].isActive = conveyorRunning && (machineState.pressVelocity != 0.0f); // STAMPING
+        signboards[8].isActive = conveyorRunning && (machineState.weldTorchGlow > 0.15f); // WELDING
+        signboards[7].isActive = conveyorRunning; // INSPECT
+        signboards[6].isActive = packagingRunning && (palletizerCurrentSource >= 0); // PALLET
+        signboards[5].isActive = packagingRunning; // WRAP
+        signboards[4].isActive = packagingRunning; // SHIP
+        signboards[3].isActive = conveyorRunning; // ASSEMBLY
+        signboards[2].isActive = conveyorRunning; // COLOR APPLIED
+        signboards[1].isActive = packagingRunning; // PACKED
+        signboards[0].isActive = gatheredBoxes > 0; // GATHERED
     }
     
     for (auto& board : signboards) {
-        board.draw(V, ls, I, globalTime);
+        board.draw(V, texCubeVAO, ls, I, globalTime);
     }
 
     };

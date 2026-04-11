@@ -123,19 +123,10 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\fashion_room.jpg">
-      <Filter>Source Files\textures</Filter>
-    </Image>
     <Image Include="textures\fashion_shop.png">
       <Filter>Source Files\textures</Filter>
     </Image>
     <Image Include="textures\floor_tiles_texture.jpg">
-      <Filter>Source Files\textures</Filter>
-    </Image>
-    <Image Include="textures\food_court.jpg">
-      <Filter>Source Files\textures</Filter>
-    </Image>
-    <Image Include="textures\food_court.png">
       <Filter>Source Files\textures</Filter>
     </Image>
     <Image Include="textures\gems_shop.jpg">
@@ -175,6 +166,12 @@
       <Filter>Source Files\textures</Filter>
     </Image>
     <Image Include="textures\tree_texture.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\brick.jpg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="textures\industry.jpg">
       <Filter>Source Files\textures</Filter>
     </Image>
   </ItemGroup>

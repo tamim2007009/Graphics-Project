@@ -219,32 +219,33 @@ void loadSceneTextures() {
     stbi_set_flip_vertically_on_load(true);
     
     // Primary textures (these should load from resources)
-    texFloor = loadTexture(findResource(TexturePaths::FloorTiles).c_str());
-    texFashion = loadTexture(findResource(TexturePaths::FashionShop).c_str());
-    texTech = loadTexture(findResource(TexturePaths::TechShop).c_str());
-    texGems = loadTexture(findResource(TexturePaths::GemsShop).c_str());
-    texFood = loadTexture(findResource(TexturePaths::FoodCourt).c_str());
-    texTreeLeaf = loadTexture(findResource(TexturePaths::TreeLeaves).c_str());
-    texTreeBark = loadTexture(findResource(TexturePaths::TreeBark).c_str());
-    texGrass = loadTexture(findResource(TexturePaths::Grass).c_str());
+    texFloor = loadTexture(findResource("textures/floor_tiles_texture.jpg").c_str());
+    texFashion = loadTexture(findResource("textures/fashion_shop.png").c_str());
+    texTech = loadTexture(findResource("textures/tech_shop.png").c_str());
+    texGems = loadTexture(findResource("textures/gems_shop.jpg").c_str());
+    texFood = loadTexture(findResource("textures/prayer_room.jpg").c_str());
+    texTreeLeaf = loadTexture(findResource("textures/tree_leaves_texture.png").c_str());
+    texTreeBark = loadTexture(findResource("textures/tree_texture.jpg").c_str());
+    texGrass = loadTexture(findResource("textures/grass.jpg").c_str());
+    texIndustryFloor = loadTexture(findResource("textures/industry.jpg").c_str()); // Using industry.jpg floor as requested
     
-    cout << "\n--- GENERATING PROCEDURAL TEXTURES (ENHANCED REALISM) ---" << endl;
+    cout << "\n--- LOADING PROCEDURAL TEXTURES FROM IMAGES ---" << endl;
     
-    // Optional textures - use procedural generation directly
-    cout << "  -> Generating procedural brick texture..." << endl;
-    texBrick = TextureFallbackSystem::generateBrickTexture();
+    // Optional textures - use images available in directory
+    cout << "  -> Loading brick texture..." << endl;
+    texBrick = loadTexture(findResource("textures/brick.jpg").c_str());
     
     cout << "  -> Generating procedural concrete texture..." << endl;
-    texConcrete = TextureFallbackSystem::generateConcreteTexture();
+    texConcrete = loadTexture(findResource("textures/map.jpg").c_str()); // use map as concrete floor
     
     cout << "  -> Generating procedural metal texture..." << endl;
-    texMetal = TextureFallbackSystem::generateMetalTexture();
+    texMetal = loadTexture(findResource("textures/task_welding.jpg").c_str());
     
     cout << "  -> Generating procedural wood texture..." << endl;
-    texWood = TextureFallbackSystem::generateWoodTexture();
+    texWood = loadTexture(findResource("textures/task_packing.jpg").c_str());
     
     cout << "  -> Generating procedural roof texture..." << endl;
-    texRoof = TextureFallbackSystem::generateRoofTileTexture();
+    texRoof = loadTexture(findResource("textures/pexels.jpg").c_str());
     
     cout << "  -> Generating procedural asphalt texture..." << endl;
     texAsphalt = TextureFallbackSystem::generateAsphaltTexture();
@@ -376,6 +377,16 @@ void initializeSceneObjects() {
     visibleConveyorPath->generateVisualization(conveyorPath, 100, 0.05f);
     cout << "  [Curve Visualization] Conveyor path line generated (visible path trace)" << endl;
 
+    // Load signboards textures
+    unsigned int texSignStamping = loadTexture(findResource("textures/task_stamping.jpg").c_str());
+    unsigned int texSignWelding = loadTexture(findResource("textures/task_welding.jpg").c_str());
+    unsigned int texSignInspect = loadTexture(findResource("textures/task_inspection.jpg").c_str());
+    unsigned int texSignPallet = loadTexture(findResource("textures/task_packing.jpg").c_str());
+    unsigned int texSignShip = loadTexture(findResource("textures/task_shipping.jpg").c_str());
+    unsigned int texSignAssembly = loadTexture(findResource("textures/task_packing.jpg").c_str()); 
+    unsigned int texSignColor = loadTexture(findResource("textures/color.jpg").c_str());
+    unsigned int texSignGathered = loadTexture(findResource("textures/task_shipping.jpg").c_str());
+
     // Initialize box system
     for (int i = 0; i < MAX_BOXES; i++) {
         boxes[i].active = false;
@@ -388,46 +399,46 @@ void initializeSceneObjects() {
         boxes[i].textureID = 0;
     }
     
-    // Initialize signboards for different factory areas
+    // Initialize signboards for different factory areas in REVERSE order
     signboards.push_back(EnhancedSignboard(
-        {-22, 3.3f, 6}, {1.0f, 0.6f, 0.05f}, "STAMPING",
-        {0.2f, 0.2f, 0.22f}, {1.0f, 1.0f, 1.0f}, {0.55f, 0.56f, 0.58f}
-    ));
-    signboards.push_back(EnhancedSignboard(
-        {-10, 3.0f, 13}, {1.0f, 0.6f, 0.05f}, "WELDING",
-        {0.2f, 0.2f, 0.22f}, {1.0f, 0.7f, 0.0f}, {0.55f, 0.56f, 0.58f}
-    ));
-    signboards.push_back(EnhancedSignboard(
-        {-18, 1.8f, -6}, {0.9f, 0.5f, 0.05f}, "INSPECT",
-        {0.15f, 0.15f, 0.18f}, {0.0f, 1.0f, 0.8f}, {0.5f, 0.5f, 0.52f}
-    ));
-    signboards.push_back(EnhancedSignboard(
-        {-2, 1.8f, -5}, {0.9f, 0.5f, 0.05f}, "PALLET",
-        {0.15f, 0.15f, 0.18f}, {1.0f, 1.0f, 0.0f}, {0.5f, 0.5f, 0.52f}
-    ));
-    signboards.push_back(EnhancedSignboard(
-        {15, 2.0f, -6}, {0.9f, 0.5f, 0.05f}, "WRAP",
-        {0.15f, 0.15f, 0.18f}, {0.0f, 1.0f, 1.0f}, {0.5f, 0.5f, 0.52f}
-    ));
-    signboards.push_back(EnhancedSignboard(
-        {20, 1.8f, -5}, {1.0f, 0.5f, 0.05f}, "SHIP",
-        {0.15f, 0.15f, 0.18f}, {0.0f, 0.8f, 1.0f}, {0.5f, 0.5f, 0.52f}
-    ));
-    signboards.push_back(EnhancedSignboard(
-        {14, 2.0f, 12}, {1.0f, 0.5f, 0.05f}, "ASSEMBLY",
-        {0.15f, 0.15f, 0.18f}, {0.0f, 1.0f, 0.2f}, {0.5f, 0.5f, 0.52f}
-    ));
-    signboards.push_back(EnhancedSignboard(
-        {-8.0f, 2.3f, 14.2f}, {1.2f, 0.5f, 0.05f}, "COLOR APPLIED",
-        {0.1f, 0.12f, 0.16f}, {0.2f, 0.95f, 1.0f}, {0.5f, 0.55f, 0.58f}
+        {20.0f, 2.6f, -2.8f}, {1.2f, 0.5f, 0.05f}, "GATHERED",
+        {0.12f, 0.12f, 0.15f}, {0.0f, 1.0f, 0.7f}, {0.5f, 0.55f, 0.58f}, texSignGathered
     ));
     signboards.push_back(EnhancedSignboard(
         {15.0f, 2.4f, -8.2f}, {1.0f, 0.5f, 0.05f}, "PACKED",
-        {0.12f, 0.12f, 0.15f}, {1.0f, 1.0f, 1.0f}, {0.5f, 0.55f, 0.58f}
+        {0.12f, 0.12f, 0.15f}, {1.0f, 1.0f, 1.0f}, {0.5f, 0.55f, 0.58f}, texSignPallet
     ));
     signboards.push_back(EnhancedSignboard(
-        {20.0f, 2.6f, -2.8f}, {1.2f, 0.5f, 0.05f}, "GATHERED",
-        {0.12f, 0.12f, 0.15f}, {0.0f, 1.0f, 0.7f}, {0.5f, 0.55f, 0.58f}
+        {-8.0f, 2.3f, 14.2f}, {1.2f, 0.5f, 0.05f}, "COLOR APPLIED",
+        {0.1f, 0.12f, 0.16f}, {0.2f, 0.95f, 1.0f}, {0.5f, 0.55f, 0.58f}, texSignColor
+    ));
+    signboards.push_back(EnhancedSignboard(
+        {14, 2.0f, 12}, {1.0f, 0.5f, 0.05f}, "ASSEMBLY",
+        {0.15f, 0.15f, 0.18f}, {0.0f, 1.0f, 0.2f}, {0.5f, 0.5f, 0.52f}, texSignAssembly
+    ));
+    signboards.push_back(EnhancedSignboard(
+        {20, 1.8f, -5}, {1.0f, 0.5f, 0.05f}, "SHIP",
+        {0.15f, 0.15f, 0.18f}, {0.0f, 0.8f, 1.0f}, {0.5f, 0.5f, 0.52f}, texSignShip
+    ));
+    signboards.push_back(EnhancedSignboard(
+        {15, 2.0f, -6}, {0.9f, 0.5f, 0.05f}, "WRAP",
+        {0.15f, 0.15f, 0.18f}, {0.0f, 1.0f, 1.0f}, {0.5f, 0.5f, 0.52f}, texSignPallet
+    ));
+    signboards.push_back(EnhancedSignboard(
+        {-2, 1.8f, -5}, {0.9f, 0.5f, 0.05f}, "PALLET",
+        {0.15f, 0.15f, 0.18f}, {1.0f, 1.0f, 0.0f}, {0.5f, 0.5f, 0.52f}, texSignPallet
+    ));
+    signboards.push_back(EnhancedSignboard(
+        {-18, 1.8f, -6}, {0.9f, 0.5f, 0.05f}, "INSPECT",
+        {0.15f, 0.15f, 0.18f}, {0.0f, 1.0f, 0.8f}, {0.5f, 0.5f, 0.52f}, texSignInspect
+    ));
+    signboards.push_back(EnhancedSignboard(
+        {-10, 3.0f, 13}, {1.0f, 0.6f, 0.05f}, "WELDING",
+        {0.2f, 0.2f, 0.22f}, {1.0f, 0.7f, 0.0f}, {0.55f, 0.56f, 0.58f}, texSignWelding
+    ));
+    signboards.push_back(EnhancedSignboard(
+        {-22, 3.3f, 6}, {1.0f, 0.6f, 0.05f}, "STAMPING",
+        {0.2f, 0.2f, 0.22f}, {1.0f, 1.0f, 1.0f}, {0.55f, 0.56f, 0.58f}, texSignStamping
     ));
 }
 

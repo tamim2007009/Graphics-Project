@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ExternalIncludePath>$(ProjectDir)\opengl\include;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>C:\Users\USER\Desktop\Graphics-Project\opengl\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\USER\Desktop\Graphics-Project\opengl\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\tamim\Desktop\Graphics_Project\opengl\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\tamim\Desktop\Graphics_Project\opengl\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -170,13 +170,12 @@
     <ResourceCompile Include="Graphics_Project.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\fashion_room.jpg" />
+    <Image Include="textures\brick.jpg" />
     <Image Include="textures\fashion_shop.png" />
     <Image Include="textures\floor_tiles_texture.jpg" />
-    <Image Include="textures\food_court.jpg" />
-    <Image Include="textures\food_court.png" />
     <Image Include="textures\gems_shop.jpg" />
     <Image Include="textures\grass.jpg" />
+    <Image Include="textures\industry.jpg" />
     <Image Include="textures\map.jpg" />
     <Image Include="textures\prayer_room.jpg" />
     <Image Include="textures\task_inspection.jpg" />

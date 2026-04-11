@@ -16,16 +16,17 @@ public:
     glm::vec3 boardColor;
     glm::vec3 frameColor;
     float rotation;
+    unsigned int textureID;
     
     bool isActive = true;
     
     EnhancedSignboard(glm::vec3 pos, glm::vec3 sz, const std::string& txt, 
-                     glm::vec3 brdColor, glm::vec3 txtColor, glm::vec3 frmColor)
+                     glm::vec3 brdColor, glm::vec3 txtColor, glm::vec3 frmColor, unsigned int texID = 0)
         : position(pos), scale(sz), text(txt), textColor(txtColor), 
-          boardColor(brdColor), frameColor(frmColor), rotation(0.0f), isActive(true) {}
+          boardColor(brdColor), frameColor(frmColor), rotation(0.0f), isActive(true), textureID(texID) {}
     
     // Draw a signboard with frame and status indicators
-    void draw(unsigned int &cubeVAO, Shader &shader, glm::mat4 parentMatrix, float globalTime) {
+    void draw(unsigned int &cubeVAO, unsigned int &texCubeVAO, Shader &shader, glm::mat4 parentMatrix, float globalTime) {
         glm::mat4 model = glm::translate(parentMatrix, position);
         model = glm::rotate(model, glm::radians(rotation), glm::vec3(0, 1, 0));
         
@@ -42,7 +43,7 @@ public:
         glBindVertexArray(cubeVAO);
         glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
         
-        // Main board (colored background)
+        // Main board (colored background or texture)
         shader.setVec3("material.ambient", boardColor * 0.8f);
         shader.setVec3("material.diffuse", boardColor);
         shader.setVec3("material.specular", glm::vec3(0.2f));
@@ -50,7 +51,31 @@ public:
         
         glm::mat4 boardModel = glm::scale(model, scale);
         shader.setMat4("model", boardModel);
-        glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        
+        if (textureID != 0) {
+            shader.setBool("useTexture", true);
+            shader.setBool("blendWithColor", true);
+            shader.setFloat("texTiling", 1.0f);
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, textureID);
+            shader.setInt("material.diffuseMap", 0);
+            
+            // Fix mirrored text by flipping X-scale specifically for the texture
+            glm::mat4 texModel = glm::scale(model, glm::vec3(-scale.x, scale.y, scale.z));
+            shader.setMat4("model", texModel);
+            
+            glBindVertexArray(texCubeVAO);
+            glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+            
+            shader.setBool("useTexture", false);
+            shader.setBool("blendWithColor", false);
+        } else {
+            glBindVertexArray(cubeVAO);
+            glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
+        }
+        
+        // Return to standard geometry
+        glBindVertexArray(cubeVAO);
         
         // Status indicator lights (top corners of board)
         float lightBright1 = isActive ? (sin(globalTime * 6.0f) * 0.3f + 0.7f) : 0.1f;
