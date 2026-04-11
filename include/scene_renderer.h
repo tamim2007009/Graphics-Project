@@ -824,7 +824,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     {
         // Complete industrial manufacturing facility smoothly mapping industry floor texture
         drawCubeTextured(texCubeVAO, ls, I, C_FACTORY_FLOOR, {-14, .03f, 16}, {21, .04f, 16}, texIndustryFloor, 6.0f, 16, 1.0f);
-        drawCubeTextured(texCubeVAO, ls, I, C_MACHINE * 0.8f, {-24.5f, WH, 16}, {WT, MH, 16}, texBrick, 4.0f, 32, 1.0f); // dark industrial wall
+        drawCubeTextured(texCubeVAO, ls, I, C_MACHINE * 0.8f, {-24.5f, WH, 16}, {WT, MH, 16}, texBrick, 8.0f, 32, 1.0f); // brick industrial wall
         
         // ===== STAMPING PRESS STATION (Left side) =====
         {
@@ -1107,7 +1107,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     {
         // Convert clothing shop into advanced assembly area
         drawCubeTextured(texCubeVAO, ls, I, C_FACTORY_FLOOR, {14, .03f, 16}, {21, .04f, 16}, texConcrete, 6.0f, 16, 1.0f);
-        drawCubeTextured(texCubeVAO, ls, I, C_FASH_WALL * 0.6f, {24.5f, WH, 16}, {WT, MH, 16}, texBrick, 4.0f, 32, 1.0f);
+        drawCubeTextured(texCubeVAO, ls, I, C_FASH_WALL * 0.6f, {24.5f, WH, 16}, {WT, MH, 16}, texBrick, 8.0f, 32, 1.0f);
         
         // Assembly line machines
         drawCubeTextured(texCubeVAO, ls, I, C_MACHINE, {18, .5f, 14}, {4, 1.0f, 6}, texMetal, 2.0f, 32, 1.0f);
@@ -1324,8 +1324,8 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
         float esLen = esZ1 - esZ2;
         float esH = 4.5f;
         
-        // WEST SIDE WALL (Light gray for contrast)
-        drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-24.5f, WH, 4}, {WT, MH, 8}, texBrick, 4.0f, 32, 0.9f);
+        // WEST SIDE WALL (Brick texture for industrial look)
+        drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-24.5f, WH, 4}, {WT, MH, 8}, texBrick, 5.0f, 32, 0.9f);
         
         // NO EAST WALL IN ESCALATOR AREA - Open corridor for clear handrail visibility
         // Handrail can be seen from the corridor
@@ -1379,7 +1379,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     // ======== PRAYER ROOM (X:-24.5 to -4, Z:-14 to -7) — Northwest upper ========
     {
         drawCubeTextured(texCubeVAO, ls, I, C_PRAY_FLOOR, {-14, .03f, -10.5f}, {21, .04f, 7}, texFloor, 6.0f, 16, 1.0f);
-        drawCubeTextured(texCubeVAO, ls, I, C_PRAY_WALL, {-24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 4.0f, 32, 1.0f);
+        drawCubeTextured(texCubeVAO, ls, I, C_PRAY_WALL, {-24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 5.0f, 32, 1.0f);
         // Prayer mat
         drawCube(V, ls, I, C_PRAY_MAT, {-16, .06f, -10}, {5, .04f, 3});
         drawCube(V, ls, I, C_PRAY_MAT*.9f, {-16, .07f, -10}, {4, .02f, 2.2f});
@@ -1403,7 +1403,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     // ======== GEMS SHOP (X:4 to 24.5, Z:-14 to -7) — Northeast upper ========
     {
         drawCubeTextured(texCubeVAO, ls, I, C_GEM_WALL, {14, .03f, -10.5f}, {21, .04f, 7}, texFloor, 6.0f, 32, 1.0f);
-        drawCubeTextured(texCubeVAO, ls, I, C_GEM_WALL, {24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 4.0f, 32, 1.0f);
+        drawCubeTextured(texCubeVAO, ls, I, C_GEM_WALL, {24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 5.0f, 32, 1.0f);
         // Glass display cases
         for (int i = 0; i < 3; i++) {
             float gx = 9 + i * 6.f;

@@ -60,10 +60,6 @@ public:
             glBindTexture(GL_TEXTURE_2D, textureID);
             shader.setInt("material.diffuseMap", 0);
             
-            // Fix mirrored text by flipping X-scale specifically for the texture
-            glm::mat4 texModel = glm::scale(model, glm::vec3(-scale.x, scale.y, scale.z));
-            shader.setMat4("model", texModel);
-            
             glBindVertexArray(texCubeVAO);
             glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
             

@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ExternalIncludePath>$(ProjectDir)\opengl\include;$(ExternalIncludePath)</ExternalIncludePath>
-    <LibraryPath>C:\Users\tamim\Desktop\Graphics_Project\opengl\lib;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\tamim\Desktop\Graphics_Project\opengl\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\USER\Desktop\Graphics-Project\opengl\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\USER\Desktop\Graphics-Project\opengl\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -158,6 +158,7 @@
     <ClInclude Include="include\spotLight.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\texture_fallback_system.h" />
+    <ClInclude Include="include\texture_loader_enhanced.h" />
     <ClInclude Include="include\texture_paths.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
@@ -171,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\brick.jpg" />
+    <Image Include="textures\brick_another.jpeg" />
     <Image Include="textures\fashion_shop.png" />
     <Image Include="textures\floor_tiles_texture.jpg" />
     <Image Include="textures\gems_shop.jpg" />
@@ -189,13 +191,18 @@
     <Image Include="textures\tree_texture.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="00_START_HERE.md" />
+    <None Include="BRICK_LOADING_FIX.md" />
     <None Include="CURVES_IN_PROJECT_ANALYSIS.md" />
+    <None Include="DIAGNOSE_TEXTURES.bat" />
     <None Include="ESCALATOR_COMPLETE_OPEN_VIEW.md" />
     <None Include="ESCALATOR_FINAL_REALISTIC_DESIGN.md" />
     <None Include="ESCALATOR_HANDRAIL_ENHANCED_VISIBILITY.md" />
     <None Include="ESCALATOR_HANDRAIL_PLACEMENT.md" />
     <None Include="ESCALATOR_HANDRAIL_REALISTIC_ALIGNMENT.md" />
     <None Include="ESCALATOR_HANDRAIL_WALL_FIX.md" />
+    <None Include="FINAL_BRICK_FIX.md" />
+    <None Include="FIXES_APPLIED.md" />
     <None Include="FRACTAL_TREE_BEFORE_AFTER.md" />
     <None Include="FRACTAL_TREE_FINAL_VERIFICATION.md" />
     <None Include="FRACTAL_TREE_IMPLEMENTATION_SUMMARY.md" />
@@ -205,6 +212,8 @@
     <None Include="IMPLEMENTATION_COMPLETE.md" />
     <None Include="include\CURVES_README.md" />
     <None Include="PROJECT_STRUCTURE.md" />
+    <None Include="QUICK_FIX.md" />
+    <None Include="README_BRICK_FIX.md" />
     <None Include="REALISTIC_HANDRAIL_IMPLEMENTATION.md" />
     <None Include="shaders\fragmentShader.fs" />
     <None Include="shaders\fragmentShaderForGouraudShading.fs" />
@@ -216,6 +225,8 @@
     <None Include="shaders\vertexShaderForPhongShadingWithTexture.vs" />
     <None Include="split_phase4.py" />
     <None Include="TECHNICAL_IMPLEMENTATION_DETAILS.md" />
+    <None Include="TEXTURE_LOADING_GUIDE.md" />
+    <None Include="VS_WORKING_DIRECTORY_SETUP.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="include\CURVES_OVERVIEW.txt" />
