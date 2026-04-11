@@ -171,6 +171,8 @@
     <ResourceCompile Include="Graphics_Project.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="D:\brick_another.jpeg" />
+    <Image Include="D:\tiles2.jpeg" />
     <Image Include="textures\brick.jpg" />
     <Image Include="textures\brick_another.jpeg" />
     <Image Include="textures\fashion_shop.png" />
@@ -187,14 +189,15 @@
     <Image Include="textures\task_welding.jpg" />
     <Image Include="textures\tech_shop.jpg" />
     <Image Include="textures\tech_shop.png" />
+    <Image Include="textures\tiles2.jpeg" />
     <Image Include="textures\tree_leaves_texture.png" />
     <Image Include="textures\tree_texture.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="00_START_HERE.md" />
-    <None Include="BEFORE_AFTER_COMPARISON.md" />
     <None Include="BRICK_LOADING_FIX.md" />
     <None Include="CURVES_IN_PROJECT_ANALYSIS.md" />
+    <None Include="D:\tiles.avif" />
     <None Include="DIAGNOSE_TEXTURES.bat" />
     <None Include="ESCALATOR_COMPLETE_OPEN_VIEW.md" />
     <None Include="ESCALATOR_FINAL_REALISTIC_DESIGN.md" />
@@ -240,14 +243,23 @@
     <None Include="SPECULAR_REMOVAL_SUMMARY.md" />
     <None Include="split_phase4.py" />
     <None Include="TECHNICAL_IMPLEMENTATION_DETAILS.md" />
+    <None Include="textures\tiles.avif" />
     <None Include="TEXTURE_LOADING_GUIDE.md" />
     <None Include="VERIFICATION_REPORT.md" />
     <None Include="VS_WORKING_DIRECTORY_SETUP.md" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="BRICK_TEXTURE_FIX_SUMMARY.txt" />
+    <Text Include="BRICK_TEXTURE_RESOLUTION_REPORT.txt" />
+    <Text Include="CHANGES_APPLIED.txt" />
+    <Text Include="CLEANUP_SUMMARY.txt" />
+    <Text Include="CODE_CHANGES_DETAILED.txt" />
+    <Text Include="FINAL_COMPLETION_REPORT.txt" />
     <Text Include="include\CURVES_OVERVIEW.txt" />
     <Text Include="include\CURVE_IMPLEMENTATION_GUIDE.txt" />
     <Text Include="PROJECT_STRUCTURE.txt" />
+    <Text Include="QUICK_REFERENCE.txt" />
+    <Text Include="TEXTURE_TILING_TECHNICAL_REFERENCE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

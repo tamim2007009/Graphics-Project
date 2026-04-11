@@ -180,6 +180,15 @@
     <Image Include="textures\brick_another.jpeg">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="textures\tiles2.jpeg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="D:\brick_another.jpeg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
+    <Image Include="D:\tiles2.jpeg">
+      <Filter>Source Files\textures</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\fragmentShader.fs">
@@ -247,15 +256,28 @@
     <None Include="FINAL_REMOVAL_SUMMARY.md" />
     <None Include="LIGHT_DIRECTION_FIX.md" />
     <None Include="LIGHT_FIX_SUMMARY.md" />
-    <None Include="BEFORE_AFTER_COMPARISON.md" />
     <None Include="QUICK_START.md" />
     <None Include="VERIFICATION_REPORT.md" />
     <None Include="README_LIGHT_FIX.md" />
     <None Include="INDEX.md" />
+    <None Include="textures\tiles.avif">
+      <Filter>Source Files\textures</Filter>
+    </None>
+    <None Include="D:\tiles.avif">
+      <Filter>Source Files\textures</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="PROJECT_STRUCTURE.txt" />
     <Text Include="include\CURVE_IMPLEMENTATION_GUIDE.txt" />
     <Text Include="include\CURVES_OVERVIEW.txt" />
+    <Text Include="CLEANUP_SUMMARY.txt" />
+    <Text Include="CHANGES_APPLIED.txt" />
+    <Text Include="CODE_CHANGES_DETAILED.txt" />
+    <Text Include="FINAL_COMPLETION_REPORT.txt" />
+    <Text Include="QUICK_REFERENCE.txt" />
+    <Text Include="BRICK_TEXTURE_FIX_SUMMARY.txt" />
+    <Text Include="TEXTURE_TILING_TECHNICAL_REFERENCE.txt" />
+    <Text Include="BRICK_TEXTURE_RESOLUTION_REPORT.txt" />
   </ItemGroup>
 </Project>

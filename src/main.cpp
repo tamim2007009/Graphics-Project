@@ -621,10 +621,10 @@ int main()
         }
 
         // Sun directional light interpolation (warm day → cool night)
-        glm::vec3 sunDiffDay(1.2f, 1.0f, 0.7f);
-        glm::vec3 sunDiffNight(0.15f, 0.12f, 0.20f);
-        glm::vec3 sunSpecDay(0.9f, 0.75f, 0.5f);
-        glm::vec3 sunSpecNight(0.1f, 0.08f, 0.15f);
+        glm::vec3 sunDiffDay(0.9f, 0.75f, 0.4f);
+        glm::vec3 sunDiffNight(0.05f, 0.05f, 0.12f);
+        glm::vec3 sunSpecDay(0.7f, 0.55f, 0.3f);
+        glm::vec3 sunSpecNight(0.02f, 0.02f, 0.05f);
         dirLight.diffuse = glm::mix(sunDiffDay, sunDiffNight, dnMix);
         dirLight.specular = glm::mix(sunSpecDay, sunSpecNight, dnMix);
         dirLight2.diffuse = dirLight.diffuse;

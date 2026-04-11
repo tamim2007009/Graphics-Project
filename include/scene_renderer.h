@@ -223,15 +223,15 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     // MALL EXTERIOR (X:-25 to 25, Z:-25 to 25)
 
     // North wall - with brick texture for realism
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {0, WH, -25}, {50, MH, WT}, texBrick, 25.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {0, WH, -25}, {50, MH, WT}, texBrick, 2.0f, 32, 0.9f);
     // South wall (gap X:-4 to 4 for entrance) - with brick texture
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-14.5f, WH, 25}, {21, MH, WT}, texBrick, 12.0f, 32, 0.9f);
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {14.5f, WH, 25}, {21, MH, WT}, texBrick, 12.0f, 32, 0.9f);
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {0, MH - .5f, 25}, {8, 1, WT}, texBrick, 4.0f, 32, 0.9f); // strip above entrance
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-14.5f, WH, 25}, {21, MH, WT}, texBrick, 1.5f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {14.5f, WH, 25}, {21, MH, WT}, texBrick, 1.5f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {0, MH - .5f, 25}, {8, 1, WT}, texBrick, 1.0f, 32, 0.9f); // strip above entrance
     // West wall - with brick texture
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-25, WH, 0}, {WT, MH, 50}, texBrick, 25.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {-25, WH, 0}, {WT, MH, 50}, texBrick, 2.0f, 32, 0.9f);
     // East wall - with brick texture
-    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {25, WH, 0}, {WT, MH, 50}, texBrick, 25.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_EXT, {25, WH, 0}, {WT, MH, 50}, texBrick, 2.0f, 32, 0.9f);
     // Entrance awning
     drawCube(V, ls, I, C_AWNING, {0, MH + .1f, 26.5f}, {12, .2f, 3.5f});
     // Glass panels beside entrance
@@ -512,9 +512,8 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
             glm::mat4 inspectGantry = glm::translate(I, {inspectX, 1.2f, inspectZ});
             drawCube(V, ls, inspectGantry, C_DARK_METAL, {0, 0, 0}, {6.5f, 0.3f, 0.3f});
             
-            // Automated vision camera (moving probe for quality check)
-            float cameraPos = sin(globalTime * 1.5f) * 2.5f;
-            drawCube(V, ls, I, C_CYAN_ACCENT, {inspectX + cameraPos, 1.35f, inspectZ - 1.8f}, {0.25f, 0.15f, 0.15f});
+            // Automated vision camera (fixed on gantry - no floating)
+            drawCube(V, ls, I, C_CYAN_ACCENT, {inspectX, 1.35f, inspectZ - 1.8f}, {0.25f, 0.15f, 0.15f});
             
             // Quality indicator lights
             float qualityPass = sin(globalTime * 2.0f) * 0.5f + 0.5f;
@@ -533,26 +532,6 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
             
             // Input conveyor into boxing machine
             drawCube(V, ls, I, C_CONVEYOR, {boxingX - 3.0f, 0.15f, boxingZ}, {2.5f, 0.2f, 1.5f});
-            
-            // Items being boxed - realistic filling cycle showing boxes inside machine
-            float fillingCycle = fmod(globalTime * 0.6f, 1.0f);
-            for (int boxIdx = 0; boxIdx < 2; boxIdx++) {
-                float inMachinePhase = fmod(fillingCycle * 2.0f + boxIdx, 2.0f) / 2.0f;
-                
-                float itemY;
-                if (inMachinePhase < 0.3f) {
-                    // Item dropping into box
-                    itemY = 0.7f - (inMachinePhase / 0.3f) * 0.4f;
-                } else if (inMachinePhase < 0.7f) {
-                    // In box being packed
-                    itemY = 0.3f + sin((inMachinePhase - 0.3f) / 0.4f * 3.14159f) * 0.1f;
-                } else {
-                    // Box complete, rising to exit
-                    itemY = 0.3f + ((inMachinePhase - 0.7f) / 0.3f) * 0.5f;
-                }
-                
-                drawCube(V, ls, I, glm::vec3(0.25f, 0.95f, 0.25f), {boxingX, itemY, boxingZ}, {0.50f, 0.45f, 0.50f}, 64, 0.9f);
-            }
             
             // Output conveyor (packed boxes leaving)
             drawCube(V, ls, I, C_CONVEYOR, {boxingX + 3.0f, 0.15f, boxingZ}, {2.5f, 0.2f, 1.5f});
@@ -628,11 +607,6 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
                 float sz = paletizeZ - 0.40f + row * 0.80f;
                 drawCube(V, ls, I, glm::vec3(0.92f, 0.92f, 0.90f), {sx, sy, sz}, {0.50f, 0.55f, 0.50f}, 64, 0.95f);
             }
-
-            // Picked box visual (held by gripper while transferring)
-            if (palletizerCurrentSource >= 0 && t >= 0.18f && t < 0.80f) {
-                drawCube(V, ls, suction, glm::vec3(0.92f, 0.92f, 0.90f), {0, -0.22f, 0}, {0.50f, 0.50f, 0.50f}, 64, 0.95f);
-            }
         }
         
         // STAGE 4: STRETCH WRAPPING STATION (X: 15, Z: -6)
@@ -673,16 +647,6 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
                     }
                 }
             }
-            
-            // Active film stretching from carriage to the load
-            glm::mat4 activeFilm = glm::translate(I, {wrapX - 0.7f, filmHeight, wrapZ});
-            activeFilm = glm::rotate(activeFilm, glm::radians(wrapRotation), {0, 1, 0});
-            drawCube(V, ls, activeFilm, glm::vec3(0.85f, 0.93f, 0.98f), {0.5f, 0, 0.5f}, {1.0f, 0.58f, 0.02f}, 128, 0.3f);
-
-            // Plastic wrap buildup effect globally on the load
-            float buildupAlpha = wrappingCycle * 0.45f; // Gets thicker over time
-            drawCube(V, ls, wrappingPallet, glm::vec3(0.85f, 0.95f, 1.0f), 
-                     {0, 1.15f, 0}, {1.45f, 2.2f, 1.45f}, 128, buildupAlpha);
             
             // Output conveyor (wrapped pallets leaving)
             drawCube(V, ls, I, C_CONVEYOR, {wrapX + 3.0f, 0.15f, wrapZ}, {2.5f, 0.2f, 1.5f});
@@ -1414,7 +1378,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     // ======== PRAYER ROOM (X:-24.5 to -4, Z:-14 to -7) — Northwest upper ========
     {
         drawCubeTextured(texCubeVAO, ls, I, C_PRAY_FLOOR, {-14, .03f, -10.5f}, {21, .04f, 7}, texFloor, 6.0f, 16, 1.0f);
-        drawCubeTextured(texCubeVAO, ls, I, C_PRAY_WALL, {-24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 5.0f, 32, 1.0f);
+        drawCubeTextured(texCubeVAO, ls, I, C_PRAY_WALL, {-24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 1.5f, 32, 1.0f);
         // Prayer mat
         drawCube(V, ls, I, C_PRAY_MAT, {-16, .06f, -10}, {5, .04f, 3});
         drawCube(V, ls, I, C_PRAY_MAT*.9f, {-16, .07f, -10}, {4, .02f, 2.2f});
@@ -1438,7 +1402,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
     // ======== GEMS SHOP (X:4 to 24.5, Z:-14 to -7) — Northeast upper ========
     {
         drawCubeTextured(texCubeVAO, ls, I, C_GEM_WALL, {14, .03f, -10.5f}, {21, .04f, 7}, texFloor, 6.0f, 32, 1.0f);
-        drawCubeTextured(texCubeVAO, ls, I, C_GEM_WALL, {24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 5.0f, 32, 1.0f);
+        drawCubeTextured(texCubeVAO, ls, I, C_GEM_WALL, {24.5f, WH, -10.5f}, {WT, MH, 7}, texBrick, 1.5f, 32, 1.0f);
         // Glass display cases
         for (int i = 0; i < 3; i++) {
             float gx = 9 + i * 6.f;
@@ -1526,10 +1490,10 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
 
     // ROOF PARAPET
     float pY = MH + .5f;
-    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {0, pY, -25}, {50, 1, .3f}, texBrick, 25.0f, 32, 0.9f);
-    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {0, pY, 25}, {50, 1, .3f}, texBrick, 25.0f, 32, 0.9f);
-    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {-25, pY, 0}, {.3f, 1, 50}, texBrick, 25.0f, 32, 0.9f);
-    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {25, pY, 0}, {.3f, 1, 50}, texBrick, 25.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {0, pY, -25}, {50, 1, .3f}, texBrick, 2.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {0, pY, 25}, {50, 1, .3f}, texBrick, 2.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {-25, pY, 0}, {.3f, 1, 50}, texBrick, 2.0f, 32, 0.9f);
+    drawCubeTextured(texCubeVAO, ls, I, C_PARAPET, {25, pY, 0}, {.3f, 1, 50}, texBrick, 2.0f, 32, 0.9f);
 
     // ===== DRAW ALL SIGNBOARDS =====
     // Update signboard status dynamically based on system states (Reversed Indices)

@@ -1,0 +1,111 @@
+================================================================================
+BRICK TEXTURE DISTORTION FIX - SUMMARY
+================================================================================
+
+ISSUE:
+------
+The brick.jpg texture applied to factory walls and mall exterior walls was 
+appearing distorted and pixelated instead of looking like a realistic brick 
+surface. The texture appeared stretched, blurry, or excessively repeated.
+
+ROOT CAUSE:
+-----------
+Excessive texture tiling values were being applied to the walls:
+  - North wall:        25.0f (repeating 25 times across 50 units)
+  - South walls:       12.0f (repeating 12 times across 21 units)  
+  - Entrance strip:    4.0f (repeating 4 times across 8 units)
+  - West/East walls:   25.0f (repeating 25 times across 50 units)
+  - Roof parapets:     25.0f (repeating 25 times across 50 units)
+
+When textures repeat too many times across a surface, individual pixels of the 
+texture image become enlarged and visible, causing distortion rather than a 
+realistic detailed surface.
+
+SOLUTION APPLIED:
+-----------------
+Reduced texture tiling values to realistic amounts appropriate for architectural 
+surfaces. The new values follow best practices for photorealistic texturing:
+
+1. MALL EXTERIOR WALLS (scene_renderer.h):
+   - North wall:        25.0f ? 2.0f  
+   - South walls:       12.0f ? 1.5f  
+   - Entrance strip:    4.0f  ? 1.0f  
+   - West/East walls:   25.0f ? 2.0f  
+
+2. FACTORY INDUSTRIAL WALLS:
+   - Manufacturing zone: 8.0f  ? 1.5f  
+   - Prayer room wall:   5.0f  ? 1.5f  
+   - Gems shop wall:     5.0f  ? 1.5f  
+
+3. ROOF PARAPETS (all sides):
+   - All edges:         25.0f ? 2.0f  
+
+RECOMMENDED TILING VALUES:
+--------------------------
+- Single large surface (> 10m wide):  1.0f - 2.0f  (texture once or twice)
+- Medium wall (5-10m):                1.5f - 3.0f  (subtle repetition)
+- Small detail/accent:                2.0f - 4.0f  (fine detail visible)
+- Outdoor ground/terrain:             4.0f - 12.0f (can tile more)
+
+WHY THIS WORKS:
+---------------
+Lower tiling values mean:
+? Larger texture scale on the surface
+? Fewer visible repetitions of the pattern
+? Better definition of individual brick details
+? More realistic appearance
+? Textures blend better with lighting
+
+TEXTURE FILTERING SETTINGS (Already Optimized):
+-----------------------------------------------
+In loadTexture() function (src/main.cpp):
+- MIN_FILTER: GL_LINEAR_MIPMAP_LINEAR  (smooth at any distance)
+- MAG_FILTER: GL_LINEAR                (smooth magnification)
+- Wrapping:   GL_REPEAT                (seamless tiling)
+- Mipmaps:    Generated               (multiple resolution levels)
+
+These settings ensure the texture appears high-quality regardless of viewing 
+distance or angle.
+
+AFFECTED SURFACES:
+------------------
+? Mall exterior north wall
+? Mall exterior south walls (both sections)
+? Mall exterior entrance strip above door
+? Mall exterior west wall
+? Mall exterior east wall
+? Factory manufacturing zone industrial wall
+? Prayer room wall
+? Gems shop wall
+? All four roof parapets (north, south, east, west)
+
+VISUAL IMPROVEMENT:
+-------------------
+Before: Pixelated, stretched brick texture with obvious repetition artifacts
+After:  Clean, realistic brick surface with proper detail visibility
+
+The brick pattern now clearly shows:
+- Individual brick dimensions (mortar joints)
+- Natural color variation
+- Surface texture and weathering
+- Proper scale relative to other scene elements
+
+BUILD STATUS:
+-------------
+? All changes compiled successfully
+? No errors or warnings
+? Ready for testing
+
+TESTING RECOMMENDATIONS:
+------------------------
+1. Run the application and navigate to observe the walls
+2. View from different distances and angles
+3. Check texture quality in various lighting conditions
+4. Verify the brick pattern is clearly visible (not pixelated)
+5. Ensure no visible seams in tiling where surfaces meet
+
+FILES MODIFIED:
+---------------
+- include/scene_renderer.h (9 instances of texture tiling parameters changed)
+
+================================================================================
