@@ -122,28 +122,63 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
         ls.use();
         ls.setInt("shadingMode", exVertexShade ? 1 : 0);
         
-        // If blended, the object color is strongly red. If simple texture, we make it white to verify it works without surface color influence.
-        glm::vec3 objColor = exBlendMode ? glm::vec3(1.0f, 0.2f, 0.2f) : glm::vec3(1.0f, 1.0f, 1.0f);
+        // If blended, the object color is strongly yellow. If simple texture, we make it white to verify it works without surface color influence.
+        glm::vec3 objColor;
+        bool doBlend = false;
+        
+        if (exBlendMode == 0) {
+            // State 0: Simple Surface Color (Yellow)
+            objColor = glm::vec3(1.0f, 1.0f, 0.0f);
+            doBlend = false; // We won't use texture at all
+        } else if (exBlendMode == 1) {
+            // State 1: Texture Only
+            objColor = glm::vec3(1.0f, 1.0f, 1.0f);
+            doBlend = false;
+        } else {
+            // State 2: Blended (Yellow + Texture)
+            objColor = glm::vec3(1.0f, 1.0f, 0.0f);
+            doBlend = true;
+        }
         
         // Force blend mode for the fragment shader inside the exhibition call
-        ls.setBool("blendWithColor", exBlendMode);
+        ls.setBool("blendWithColor", doBlend);
         
         // Rotate the display object
         glm::mat4 objModel = glm::translate(I, {exX, 1.5f, exZ});
         objModel = glm::rotate(objModel, glm::radians(globalTime * 30.0f), {0, 1, 0});
         
+        unsigned int exTex = texContainer2; // Try to use the container! Fallbacks applied in load
+
         // We draw the "textured curvy surfaced object (at least sphere and cone)"
-        if (exObjectType == 0) {
-            // Draw Sphere
-            objModel = glm::scale(objModel, {1.6f, 1.6f, 1.6f});
-            sphHub->ambient = objColor;
-            sphHub->diffuse = objColor;
-            sphHub->drawSphereTextured(ls, objModel, texBrick, 2.0f); // Tiled brick sphere
+        if (exBlendMode == 0) {
+            // Draw without texture
+            ls.setBool("useTexture", false);
+            if (exObjectType == 0) {
+                // Draw Sphere
+                objModel = glm::scale(objModel, {1.6f, 1.6f, 1.6f});
+                sphHub->ambient = objColor;
+                sphHub->diffuse = objColor;
+                sphHub->drawSphere(ls, objModel); 
+            } else {
+                // Draw Mathematical Curvy Cone
+                objModel = glm::translate(objModel, {0.0f, -0.8f, 0.0f}); // Base center alignment
+                objModel = glm::scale(objModel, {1.5f, 1.5f, 1.5f});
+                mathCone->draw(ls, objModel, objColor, 64.0f);
+            }
         } else {
-            // Draw Mathematical Curvy Cone
-            objModel = glm::translate(objModel, {0.0f, -0.8f, 0.0f}); // Base center alignment
-            objModel = glm::scale(objModel, {1.5f, 1.5f, 1.5f});
-            mathCone->drawTextured(ls, objModel, texBrick, objColor, 3.0f, 64.0f);
+            // Draw with Texture
+            if (exObjectType == 0) {
+                // Draw Sphere
+                objModel = glm::scale(objModel, {1.6f, 1.6f, 1.6f});
+                sphHub->ambient = objColor;
+                sphHub->diffuse = objColor;
+                sphHub->drawSphereTextured(ls, objModel, exTex, 2.0f); // Tiled sphere
+            } else {
+                // Draw Mathematical Curvy Cone
+                objModel = glm::translate(objModel, {0.0f, -0.8f, 0.0f}); // Base center alignment
+                objModel = glm::scale(objModel, {1.5f, 1.5f, 1.5f});
+                mathCone->drawTextured(ls, objModel, exTex, objColor, 3.0f, 64.0f);
+            }
         }
         
         // Cleanup and Restore standard shader states so the rest of the world remains normal

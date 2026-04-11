@@ -250,6 +250,10 @@ void loadSceneTextures() {
     cout << "  -> Generating procedural asphalt texture..." << endl;
     texAsphalt = TextureFallbackSystem::generateAsphaltTexture();
     
+    cout << "  -> Loading container texture for exhibition..." << endl;
+    texContainer2 = loadTexture(findResource("textures/container2.jpg").c_str());
+    if (texContainer2 == 0) texContainer2 = texBrick; // Use brick as fallback if failed
+
     cout << "\n--- TEXTURE LOADING COMPLETE ---\n" << endl;
 }
 
@@ -1354,8 +1358,9 @@ void key_callback(GLFWwindow *w, int key, int sc, int action, int mods)
     }
     if (key == GLFW_KEY_7)
     {
-        exBlendMode = !exBlendMode;
-        cout << "Exhibition Texture: " << (exBlendMode ? "BLENDED with Object Color" : "SIMPLE (No Surface Color)") << endl;
+        exBlendMode = (exBlendMode + 1) % 3;
+        const char* modeNames[] = {"SIMPLE (Surface Color Only)", "TEXTURE ONLY (Container2)", "BLENDED (Color + Texture)"};
+        cout << "Exhibition Mode: " << modeNames[exBlendMode] << endl;
     }
     if (key == GLFW_KEY_8)
     {

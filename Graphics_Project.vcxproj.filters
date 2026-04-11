@@ -105,6 +105,9 @@
     <ClInclude Include="include\curveApplications.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\texture_loader_enhanced.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="opengl\glad.c">
@@ -174,6 +177,9 @@
     <Image Include="textures\industry.jpg">
       <Filter>Source Files\textures</Filter>
     </Image>
+    <Image Include="textures\brick_another.jpeg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\fragmentShader.fs">
@@ -219,6 +225,17 @@
     <None Include="FRACTAL_TREE_BEFORE_AFTER.md" />
     <None Include="FRACTAL_TREE_QUICK_REFERENCE.md" />
     <None Include="FRACTAL_TREE_FINAL_VERIFICATION.md" />
+    <None Include="00_START_HERE.md" />
+    <None Include="BRICK_LOADING_FIX.md" />
+    <None Include="DIAGNOSE_TEXTURES.bat">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="FINAL_BRICK_FIX.md" />
+    <None Include="FIXES_APPLIED.md" />
+    <None Include="QUICK_FIX.md" />
+    <None Include="README_BRICK_FIX.md" />
+    <None Include="TEXTURE_LOADING_GUIDE.md" />
+    <None Include="VS_WORKING_DIRECTORY_SETUP.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="PROJECT_STRUCTURE.txt" />
