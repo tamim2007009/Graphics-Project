@@ -194,42 +194,7 @@
     <Image Include="textures\tree_texture.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="00_START_HERE.md" />
-    <None Include="BRICK_LOADING_FIX.md" />
-    <None Include="CURVES_IN_PROJECT_ANALYSIS.md" />
     <None Include="D:\tiles.avif" />
-    <None Include="DIAGNOSE_TEXTURES.bat" />
-    <None Include="ESCALATOR_COMPLETE_OPEN_VIEW.md" />
-    <None Include="ESCALATOR_FINAL_REALISTIC_DESIGN.md" />
-    <None Include="ESCALATOR_HANDRAIL_ENHANCED_VISIBILITY.md" />
-    <None Include="ESCALATOR_HANDRAIL_PLACEMENT.md" />
-    <None Include="ESCALATOR_HANDRAIL_REALISTIC_ALIGNMENT.md" />
-    <None Include="ESCALATOR_HANDRAIL_WALL_FIX.md" />
-    <None Include="FINAL_BRICK_FIX.md" />
-    <None Include="FINAL_REMOVAL_SUMMARY.md" />
-    <None Include="FIXES_APPLIED.md" />
-    <None Include="FRACTAL_TREE_BEFORE_AFTER.md" />
-    <None Include="FRACTAL_TREE_FINAL_VERIFICATION.md" />
-    <None Include="FRACTAL_TREE_IMPLEMENTATION_SUMMARY.md" />
-    <None Include="FRACTAL_TREE_IMPROVEMENTS.md" />
-    <None Include="FRACTAL_TREE_QUICK_REFERENCE.md" />
-    <None Include="FRACTAL_TREE_TECHNICAL_GUIDE.md" />
-    <None Include="IMPLEMENTATION_COMPLETE.md" />
-    <None Include="IMPLEMENTATION_SUMMARY.md" />
-    <None Include="include\CURVES_README.md" />
-    <None Include="INDEX.md" />
-    <None Include="LIGHTING_COMPONENT_IMPLEMENTATION.md" />
-    <None Include="LIGHTING_FIXTURES_AND_IMPROVEMENTS.md" />
-    <None Include="LIGHT_DIRECTION_FIX.md" />
-    <None Include="LIGHT_FIX_SUMMARY.md" />
-    <None Include="PROJECT_STRUCTURE.md" />
-    <None Include="QUICK_FIX.md" />
-    <None Include="QUICK_START.md" />
-    <None Include="QUICK_VISUAL_REFERENCE.md" />
-    <None Include="README_BRICK_FIX.md" />
-    <None Include="README_LIGHTING_FIX.md" />
-    <None Include="README_LIGHT_FIX.md" />
-    <None Include="REALISTIC_HANDRAIL_IMPLEMENTATION.md" />
     <None Include="shaders\fragmentShader.fs" />
     <None Include="shaders\fragmentShaderForGouraudShading.fs" />
     <None Include="shaders\fragmentShaderForPhongShading.fs" />
@@ -238,28 +203,7 @@
     <None Include="shaders\vertexShaderForGouraudShading.vs" />
     <None Include="shaders\vertexShaderForPhongShading.vs" />
     <None Include="shaders\vertexShaderForPhongShadingWithTexture.vs" />
-    <None Include="SPECULAR_LIGHTING_FIX.md" />
-    <None Include="SPECULAR_LIGHTING_IMPROVEMENTS.md" />
-    <None Include="SPECULAR_REMOVAL_SUMMARY.md" />
-    <None Include="split_phase4.py" />
-    <None Include="TECHNICAL_IMPLEMENTATION_DETAILS.md" />
     <None Include="textures\tiles.avif" />
-    <None Include="TEXTURE_LOADING_GUIDE.md" />
-    <None Include="VERIFICATION_REPORT.md" />
-    <None Include="VS_WORKING_DIRECTORY_SETUP.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="BRICK_TEXTURE_FIX_SUMMARY.txt" />
-    <Text Include="BRICK_TEXTURE_RESOLUTION_REPORT.txt" />
-    <Text Include="CHANGES_APPLIED.txt" />
-    <Text Include="CLEANUP_SUMMARY.txt" />
-    <Text Include="CODE_CHANGES_DETAILED.txt" />
-    <Text Include="FINAL_COMPLETION_REPORT.txt" />
-    <Text Include="include\CURVES_OVERVIEW.txt" />
-    <Text Include="include\CURVE_IMPLEMENTATION_GUIDE.txt" />
-    <Text Include="PROJECT_STRUCTURE.txt" />
-    <Text Include="QUICK_REFERENCE.txt" />
-    <Text Include="TEXTURE_TILING_TECHNICAL_REFERENCE.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

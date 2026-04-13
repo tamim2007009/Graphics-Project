@@ -236,9 +236,6 @@
     <None Include="FRACTAL_TREE_FINAL_VERIFICATION.md" />
     <None Include="00_START_HERE.md" />
     <None Include="BRICK_LOADING_FIX.md" />
-    <None Include="DIAGNOSE_TEXTURES.bat">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="FINAL_BRICK_FIX.md" />
     <None Include="FIXES_APPLIED.md" />
     <None Include="QUICK_FIX.md" />
