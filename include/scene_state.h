@@ -77,12 +77,14 @@ struct Box {
     float rotation;  // Box rotation for realistic tumbling
     float vx, vz;    // Velocity components for physics
     unsigned int textureID; // Texture ID for the applied texture
+    int creationOrder; // Which box was this created (0=1st, 1=2nd, 2=3rd, etc for alternating)
 };
 inline const int MAX_BOXES = 50;
 inline Box boxes[MAX_BOXES];
 inline float boxCreationRate = 4.0f;  // Synchronized process: 1 box every 4.0s (matches machine cycles)
 inline float lastBoxCreationTime = 0.0f;
 inline int gatheredBoxes = 0; // Finished packed boxes gathered in shipping area
+inline int totalBoxesCreated = 0; // Track total boxes created for alternating pattern
 
 // Factory Lift System
 inline float factoryLiftY = 0.0f;
@@ -202,6 +204,7 @@ inline void updateAnimations(float deltaTime) {
                 boxes[i].color = glm::vec3(0.8f, 0.3f, 0.15f);
                 boxes[i].creationTime = globalTime;
                 boxes[i].textureID = 0;
+                boxes[i].creationOrder = totalBoxesCreated++; // ALTERNATING: track creation order
                 lastBoxCreationTime = 0.0f;
                 break;
             }
@@ -212,7 +215,8 @@ inline void updateAnimations(float deltaTime) {
         if (boxes[i].active) {
             if (conveyorRunning) {
                 float step = deltaTime * conveyorSpeed * 2.0f;
-                bool takesLiftBranch = (i % 3 == 0);
+                // ALTERNATING: 0=lift, 1=packaging, 2=lift, 3=packaging, etc
+                bool takesLiftBranch = (boxes[i].creationOrder % 2 == 0);
                 
                 if (!packagingRunning && boxes[i].position >= 8.0f && !takesLiftBranch)
                     step = 0.0f;
@@ -230,7 +234,7 @@ inline void updateAnimations(float deltaTime) {
                     
                     if (!blocked) {
                         for(int j=0; j<MAX_BOXES; j++) {
-                            if(i!=j && boxes[j].active && (j%3==0) && boxes[j].position > boxes[i].position && boxes[j].position < 40.0f && (boxes[j].position - boxes[i].position) < 0.65f) {
+                            if(i!=j && boxes[j].active && (boxes[j].creationOrder % 2 == 0) && boxes[j].position > boxes[i].position && boxes[j].position < 40.0f && (boxes[j].position - boxes[i].position) < 0.65f) {
                                 blocked = true;
                                 break;
                             }
@@ -279,14 +283,16 @@ inline void updateAnimations(float deltaTime) {
                 boxes[i].color += glm::vec3(weldEffect, weldEffect, weldEffect * 0.5f);
             }
             else if (boxes[i].position < 10.0f) {
-                if (!(i % 3 == 0)) {
+                // Only packaging boxes (odd creationOrder) get packaged/color changed
+                if (boxes[i].creationOrder % 2 != 0) {
                     boxes[i].textureID = 0;
                     float packFactor = glm::clamp((boxes[i].position - 6.0f) / 4.0f, 0.0f, 1.0f);
                     boxes[i].color = glm::mix(boxes[i].color, glm::vec3(0.92f, 0.92f, 0.90f), packFactor);
                 }
             }
             else if (boxes[i].position < 40.0f) {
-                if (!(i % 3 == 0)) {
+                // Only packaging boxes should have texture reset in this range
+                if (boxes[i].creationOrder % 2 != 0) {
                     boxes[i].textureID = 0;
                 }
             }
@@ -298,7 +304,7 @@ inline void updateAnimations(float deltaTime) {
 
     int boxesOnLift = 0;
     for (int i = 0; i < MAX_BOXES; i++) {
-        if (boxes[i].active && (i % 3 == 0) && boxes[i].position >= 27.0f && boxes[i].position <= 28.6f) {
+        if (boxes[i].active && (boxes[i].creationOrder % 2 == 0) && boxes[i].position >= 27.0f && boxes[i].position <= 28.6f) {
             boxesOnLift++;
         }
     }
@@ -315,14 +321,17 @@ inline void updateAnimations(float deltaTime) {
             factoryLiftWait = 0.0f;
         }
     } else if (factoryLiftState == 2) {
+        // Hold at top - automatic timeout after 3 seconds or all boxes cleared
+        factoryLiftWait += deltaTime;
         bool liftClear = true;
         for(int i=0; i<MAX_BOXES; i++) {
-            if (boxes[i].active && (i % 3 == 0) && boxes[i].position >= 27.0f && boxes[i].position <= 29.5f) {
+            if (boxes[i].active && (boxes[i].creationOrder % 2 == 0) && boxes[i].position >= 27.0f && boxes[i].position <= 29.5f) {
                 liftClear = false;
                 break;
             }
         }
-        if (liftClear) {
+        // Auto-lower after 3 seconds OR when all boxes are clear
+        if (liftClear || factoryLiftWait >= 3.0f) {
             factoryLiftState = 3;
         }
     } else if (factoryLiftState == 3) {
@@ -340,7 +349,7 @@ inline void updateAnimations(float deltaTime) {
 
     if (packagingRunning && palletizerCurrentSource < 0 && palletizerCycle < 0.18f) {
         for (int i = 0; i < MAX_BOXES; ++i) {
-            if (boxes[i].active && boxes[i].position > 8.0f && boxes[i].position < 12.0f) {
+            if (boxes[i].active && boxes[i].position > 8.0f && boxes[i].position < 12.0f && (boxes[i].creationOrder % 2 != 0)) {
                 palletizerCurrentSource = i;
                 break;
             }

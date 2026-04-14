@@ -404,7 +404,7 @@ inline void drawScene(unsigned int &V, unsigned int &LV, Shader &ls, Shader &fs,
                 float pos = boxes[i].position;
                 float bx = 0, bz = 0, by = 1.32f;  // Y correctly tuned to rest exactly ON the visually animated moving belt
                 bool drawn = false;
-                bool takesLiftBranch = (i % 3 == 0);
+                bool takesLiftBranch = (i % 2 == 0);  // 50/50 split: even indices to lift, odd to packaging
 
                 // ===== MAIN CONVEYOR PATH (Input → Stamping → Color → Welding) =====
                 if (pos >= -25.0f && pos <= -5.0f) {
